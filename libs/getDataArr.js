@@ -1,4 +1,4 @@
-module.exports = function (data, alphIndex, length, offset) {   //data, 행문자, legnth : 45, offset : 5 
+const excelData = (data, alphIndex, length, offset) => {   //data, 행문자, legnth : 45, offset : 5 
   let tmpData = [];
   for(let i = offset ; i < length; i++ ){
     //만약에 객체에 멤버가 존재하면(엑셀값이 존재하면)실행
@@ -10,4 +10,6 @@ module.exports = function (data, alphIndex, length, offset) {   //data, 행문�
     }
   }
   return tmpData;
-}
+};
+
+export default excelData;

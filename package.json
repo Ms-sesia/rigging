@@ -1,14 +1,17 @@
 {
   "name": "excelconverter",
   "version": "1.0.0",
-  "description": "",
+  "description": "Excel Data Converter for Rigging",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
+  "author": "Sesia",
   "license": "ISC",
   "dependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/node": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
     "xlsx": "^0.14.3"
+  },
+  "scripts": {
+    "start": "babel-node app.js"
   }
 }
