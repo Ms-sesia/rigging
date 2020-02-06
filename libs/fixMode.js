@@ -2,7 +2,6 @@ import {findFixSpecTable, finalSpecData} from "./calMainFixData";
 import numberToAlph from "./numberToAph";
 import excelData from "./excelData";
 import fs from "fs";
-import offset from "./defaultCondition";
 
 const fix = (data, row, colum, sheetName) => {
   for(let i = 1 ; i < colum ; i++ ){ // B열부터 끝열까지
@@ -33,8 +32,8 @@ const fix = (data, row, colum, sheetName) => {
     tableSpec.extMargin = data[charIndex + 7].v;
     tableSpec.fix = data[charIndex + 8].v;  // B4, C4, D4, E4, ...
     tableSpec.fixAngle = data[charIndex + 9].v;  // B5, C5, D5, E5, ...
-    tableSpec.distance = excelData(data, 'A', row, offset); // 제원표의 거리
-    tableSpec.weight = excelData(data, charIndex, row, offset); // B, C, D, E, ... 의 제원표의 무게 
+    tableSpec.distance = excelData(data, 'A', row); // 제원표의 거리
+    tableSpec.weight = excelData(data, charIndex, row); // B, C, D, E, ... 의 제원표의 무게 
 
     findFixSpecTable(tableSpec);
   }

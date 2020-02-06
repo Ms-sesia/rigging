@@ -1,5 +1,5 @@
 export const workValue = { // input value
-  workWeight : 15,
+  workWeight : 20,
   distance : 21,
   height : 50,
 };

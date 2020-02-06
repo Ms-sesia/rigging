@@ -22,6 +22,9 @@ export const findFixSpecTable = (spec) => {
       distance2 : 0,
       totalDistance : 0,
       marginHeight : 0,
+      height1 : 0,
+      height2 : 0,
+      totalHeight: 0,
       workHeight : workValue.height,
       tableWeight : [],
     };
@@ -34,10 +37,10 @@ export const findFixSpecTable = (spec) => {
     if(totalDistance % 2 !== 0 && totalDistance % 2 < 10 ) totalDistance += 1;
     calValue.totalDistance = totalDistance;
 
-    const h1 = MBoom * Math.sin(i * Math.PI/180);  // mainBoom height
-    const h2 = spec.fix * Math.sin((i - spec.fixAngle) * Math.PI/180);  // fix height
-    const totalHeight = Math.ceil(h1 + h2);  //작업높이는 올림이 더 좋아보임. 그래야 거리가 좁아짐. totalDistance와 비교 할 때 최소 거리보다 넓으면 제외.
-    calValue.marginHeight = totalHeight - (workValue.height + heightOfHookCrain.crainHeight + heightOfHookCrain.hookHeight);  // 여유 높이 = 계산한 높이 - (작업높이 + 크레인높에 + hook길이)
+    calValue.height1 = MBoom * Math.sin(i * Math.PI/180);  // mainBoom height
+    calValue.height2 = spec.fix * Math.sin((i - spec.fixAngle) * Math.PI/180);  // fix height
+    calValue.totalHeight = Math.ceil(calValue.height1 + calValue.height2);  //작업높이는 올림이 더 좋아보임. 그래야 거리가 좁아짐. totalDistance와 비교 할 때 최소 거리보다 넓으면 제외.
+    calValue.marginHeight = calValue.totalHeight - (workValue.height + heightOfHookCrain.crainHeight + heightOfHookCrain.hookHeight);  // 여유 높이 = 계산한 높이 - (작업높이 + 크레인높에 + hook길이)
 
     if( totalDistance > workValue.distance && calValue.marginHeight > 0) {  // specdistance가 totaldistance보다 큰 것, 마진이 0보다 큰 것. => distance관련 좀 더 합리적인 조건이 필요함.
       spec.distance.forEach( (data, j) => {
