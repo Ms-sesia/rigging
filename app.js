@@ -1,6 +1,7 @@
 import getTableData from "./libs/convExcel";
 import fix from "./libs/fixMode";
 import luffing from "./libs/luffingMode";
+import fs from "fs";
 
 getTableData.name.forEach( (sheetName, index) => { // 제원표의 modecode. ex) T, TN, TY3N ...
   const raw = getTableData.length[index].raw;
@@ -18,3 +19,7 @@ getTableData.name.forEach( (sheetName, index) => { // 제원표의 modecode. ex)
     // fix(getTableData.data[sheetName], raw, colum, sheetName);
   }
 }); 
+
+// fs.readFile(`./luffingFinalSpecJson/TN_165t_TAB231142.2`, 'utf8', (err, testJSONFile) => {
+//   if(err) throw err;
+// });

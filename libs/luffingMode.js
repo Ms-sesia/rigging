@@ -1,9 +1,10 @@
-import { findLuffingSpecTable, finalSpecData} from "./calLuffingData";
-// import { findLuffingSpecTable} from "./calLuffingData";
+import findLuffingSpecTable from "./calLuffingData";
 import numberToAlph from "./numberToAph";
 import excelData from "./excelData";
+import fs from "fs";
 
 const luffing = (data, row, colum, sheetName) => {
+  let finalSpecData = [];
   let tableSpec = {
     mainBoom : 0,
     mainAngle : 0,
@@ -32,8 +33,10 @@ const luffing = (data, row, colum, sheetName) => {
     tableSpec.luffing = data[charIndex + 8].v;  // B4, C4, D4, E4, ...
     tableSpec.distance = excelData(data, 'A', row); // 제원표의 거리
     tableSpec.weight = excelData(data, charIndex, row); // B, C, D, E, ... 의 제원표의 무게 
-    findLuffingSpecTable(tableSpec, sheetName);
+    finalSpecData.push(findLuffingSpecTable(tableSpec, sheetName));
   }
+
+  fs.writeFile(`./luffingFinalSpecJson/${sheetName}`, JSON.stringify(finalSpecData), 'utf8', (err) => { if(err) throw err; });
 };
 
 export default luffing;

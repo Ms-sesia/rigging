@@ -1,8 +1,8 @@
 import { workValue, heightOfHookCrain } from "./defaultCondition";
-import fs from "fs"
+import fs from "fs";
 
-export const findLuffingSpecTable = (spec, sheetName) => {
-  let finalSpecData = [];
+const findLuffingSpecTable = (spec, sheetName) => {
+  let finalSpec = [];
   // 삼각함수 : Math.cos(x*Math.PI/180) 각도는 라디안 표기
   const MBoom = spec.mainBoom + spec.totalExtLength;// mainBoom + totalExtLength
   const d1 = MBoom * Math.cos(spec.mainAngle * Math.PI/180);  // luffing에서 d1은 메인붐과 메인붐각도가 정해져있기 때문에 고정
@@ -39,10 +39,12 @@ export const findLuffingSpecTable = (spec, sheetName) => {
             workHeight : workValue.height,
             tableWeight : spec.weight[i],
           };
-          finalSpecData.push(calValue);
+          finalSpec.push(calValue);
         }
       }
     }
   }
-  fs.writeFile(`./luffingFinalSpecJson/${sheetName}`, JSON.stringify(finalSpecData), 'utf8', (err) => { if(err) throw err; });
+  return finalSpec;
 };
+
+export default findLuffingSpecTable;
