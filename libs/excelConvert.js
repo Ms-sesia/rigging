@@ -1,5 +1,4 @@
 import XLSX from "xlsx";
-// const XLSX = require('xlsx');
 
 const workbook = XLSX.readFile("./LTM_1500-8.1.xlsx");
 
