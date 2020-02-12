@@ -8,9 +8,9 @@ const findLuffingSpecTable = (spec) => {
   for(let i = 0 ; i < spec.weight.length ; i++){
     if(spec.weight[i]) {  // 제원표에 무게 데이터가 존재할 때
       const d2 = spec.distance[i] - d1; // 작업거리 - d1
-      const luffingAngle = Number((Math.acos(d2/spec.luffing)*(180/Math.PI)).toFixed(1));
+      const luffingAngle = Number((Math.acos(d2/spec.luffingFix)*(180/Math.PI)).toFixed(1));
       const h1 = MBoom * Math.sin(spec.mainAngle * Math.PI/180);
-      const h2 = spec.luffing * Math.sin(luffingAngle*Math.PI/180);
+      const h2 = spec.luffingFix * Math.sin(luffingAngle*Math.PI/180);
       const marginHeight = h1 + h2 - (workValue.workHeight + heightOfHookCrain.crainHeight + heightOfHookCrain.hookHeight);
       // 총 작업거리 > 주어진 작업거리 && (높이 마진(총 높이 - 주어진 높이))> 0
       if((d1 + d2) > workValue.workDistance && marginHeight > 0) {  
@@ -24,7 +24,7 @@ const findLuffingSpecTable = (spec) => {
             extBoom2 : spec.extBoom2,
             extBoom3 : spec.extBoom3,
             extMargin : spec.extMargin,
-            luffing : spec.luffing,
+            luffing : spec.luffingFix,
             luffingAngle : Number(luffingAngle.toFixed(1)),
             tableDistance : spec.distance[i],
             workDistance : workValue.workDistance,
@@ -39,6 +39,7 @@ const findLuffingSpecTable = (spec) => {
             tableWeight : spec.weight[i],
           };
           finalSpec.push(calValue);
+          break;
         }
       }
     }
