@@ -1,7 +1,6 @@
 import XLSX from "xlsx";
 import fs from "fs";
-// const XLSX = require('xlsx');
-// const fs = require('fs');
+
 const filelist = fs.readdirSync('./excelData');
 
 const excelInfo = filelist.map( (filename) => {

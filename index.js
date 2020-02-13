@@ -30,5 +30,9 @@ getTableInfo.forEach( (excelInfo) => {  // 엑셀파일 전부
 });
 
 const finalCrainInfo = firstCrainInfo(crainInfo);
-
 console.log(finalCrainInfo);
+
+// finalCrainInfo.crainName.forEach( (data, index) => {
+//   console.log(`crainName : ${data}   \tcrainMode : ${finalCrainInfo.info.modeName[index]}  \tcrainCode : ${finalCrainInfo.info.code[index]}`);
+//   console.log('data : ', finalCrainInfo.info.data[index]);
+// });

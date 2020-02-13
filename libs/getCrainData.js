@@ -37,15 +37,11 @@ const getCrainData = (data, row, colum, modeName) => {
     if(modeName === 'main' || modeName === 'fix'){  // main & fix mode
       tableSpec.fixAngle = data[charIndex + 9].v;  
       const Fix = findMainFixSpecTable(tableSpec);
-
       if(Fix.length)  finalSpecData.push(Fix);
-
     } else {  // luffing mode
       tableSpec.mainAngle = data[charIndex + 9].v;
       const Luffing = findLuffingSpecTable(tableSpec);
-
       if(Luffing.length)  finalSpecData.push(Luffing);
-
     } 
   }
   if(finalSpecData.length){
