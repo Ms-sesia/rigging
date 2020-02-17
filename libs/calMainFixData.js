@@ -1,12 +1,15 @@
-import { workValue, heightOfHookCrain } from "./defaultCondition";
+const heightOfHookCrane = { // Default Hook and Crain height. heightOfHookCrain
+  craneHeight : 2,
+  hookHeight : 6,
+};
 
-const findMainFixSpecTable = (spec) => {
+const findMainFixSpecTable = (spec, workValue) => {
   let finalSpec = [];
   // 삼각함수 : Math.cos(x*Math.PI/180) 각도는 라디안 표기
   const MBoom = spec.mainBoom + spec.totalExtLength;// mainBoom + totalExtLength
   for(let i = 0 ; i < spec.weight.length ; i++){
     //제원표에 무게 데이터가 존재 할 때 
-    if(spec.weight[i]) {
+    if(spec.weight[i]) {        
       // fix, main 모드에서 메인붐 각도는 60~85도
       for(let mainAng = 85 ; mainAng >= 60 ; mainAng--){
         const distance1 = Number((MBoom * Math.cos(mainAng * Math.PI/180)).toFixed(1));
@@ -14,7 +17,7 @@ const findMainFixSpecTable = (spec) => {
         const height1 = Number((MBoom * Math.sin(mainAng * Math.PI/180)).toFixed(1));
         const height2 = Number((spec.luffingFix * Math.sin((mainAng - spec.fixAngle) * Math.PI/180)).toFixed(1));
         const totDist = Math.ceil(distance1 + distance2);
-        const marginH = Number((height1 + height2 - (workValue.workHeight + heightOfHookCrain.hookHeight + heightOfHookCrain.crainHeight)).toFixed(1));
+        const marginH = Number((height1 + height2 - (workValue.workHeight + heightOfHookCrane.hookHeight + heightOfHookCrane.craneHeight)).toFixed(1));
         // totalDistance 가 10보다 큰 홀수일 경우 더 적은 무게를 들게끔 totalDistance를 1 더한다.(제원표에서 길이가 짝수).
         if( totDist % 2 !== 0 && totDist > 10 ) totDist += 1;
         // 여유 높이 > 0 이고 작업무게 이상을 들어야 한다.

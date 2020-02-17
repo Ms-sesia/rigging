@@ -1,6 +1,9 @@
-import { workValue, heightOfHookCrain } from "./defaultCondition";
+const heightOfHookCrane = { // Default Hook and Crain height. heightOfHookCrain
+  craneHeight : 2,
+  hookHeight : 6,
+};
 
-const findLuffingSpecTable = (spec) => {
+const findLuffingSpecTable = (spec, workValue) => {
   let finalSpec = [];
   // 삼각함수 : Math.cos(x*Math.PI/180) 각도는 라디안 표기
   const MBoom = spec.mainBoom + spec.totalExtLength;// mainBoom + totalExtLength
@@ -11,7 +14,7 @@ const findLuffingSpecTable = (spec) => {
       const luffingAngle = Number((Math.acos(d2/spec.luffingFix)*(180/Math.PI)).toFixed(1));
       const h1 = MBoom * Math.sin(spec.mainAngle * Math.PI/180);
       const h2 = spec.luffingFix * Math.sin(luffingAngle*Math.PI/180);
-      const marginHeight = h1 + h2 - (workValue.workHeight + heightOfHookCrain.crainHeight + heightOfHookCrain.hookHeight);
+      const marginHeight = h1 + h2 - (workValue.workHeight + heightOfHookCrane.craneHeight + heightOfHookCrane.hookHeight);
       // 총 작업거리 > 주어진 작업거리 && (높이 마진(총 높이 - 주어진 높이))> 0
       if((d1 + d2) > workValue.workDistance && marginHeight > 0) {  
         if(spec.weight[i] > workValue.workWeight){ 

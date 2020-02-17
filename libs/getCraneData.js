@@ -4,7 +4,7 @@ import numberToAlph from "./numberToAph";
 import excelData from "./getExcelData";
 // import fs from "fs";
 
-const getCrainData = (data, row, colum, modeName) => {
+const getcraneData = (data, row, colum, modeName, workValue) => {
   let finalSpecData = [];
   let tableSpec = {
     mainBoom : 0,
@@ -18,7 +18,6 @@ const getCrainData = (data, row, colum, modeName) => {
     distance : [],
     weight : [],
   };
-
   for(let i = 1 ; i < colum ; i++ ){ // B열부터 끝열까지
     let charIndex = numberToAlph(i);  // B, C, D, E, F, ...
     if(i>25) charIndex = numberToAlph(0) + numberToAlph(i - 26);  // Z이후 엑셀은 AA AB AC AD ...
@@ -36,11 +35,11 @@ const getCrainData = (data, row, colum, modeName) => {
 
     if(modeName === 'main' || modeName === 'fix'){  // main & fix mode
       tableSpec.fixAngle = data[charIndex + 9].v;  
-      const Fix = findMainFixSpecTable(tableSpec);
+      const Fix = findMainFixSpecTable(tableSpec, workValue);
       if(Fix.length)  finalSpecData.push(Fix);
     } else {  // luffing mode
       tableSpec.mainAngle = data[charIndex + 9].v;
-      const Luffing = findLuffingSpecTable(tableSpec);
+      const Luffing = findLuffingSpecTable(tableSpec, workValue);
       if(Luffing.length)  finalSpecData.push(Luffing);
     } 
   }
@@ -48,7 +47,6 @@ const getCrainData = (data, row, colum, modeName) => {
     const firstData = finalSpecData[0][0];
     return firstData;
   }
-  // fs.writeFile(`./luffingFinalSpecJson/${sheetName}`, JSON.stringify(finalSpecData), 'utf8', (err) => { if(err) throw err; });
 };
 
-export default getCrainData;
+export default getcraneData;

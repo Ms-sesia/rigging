@@ -12,6 +12,6 @@
     "xlsx": "^0.14.3"
   },
   "scripts": {
-    "start": "babel-node app.js"
+    "start": "babel-node test.js"
   }
 }

@@ -4,8 +4,8 @@ export const workValue = { // input value
   workHeight : 50,
 };
 
-export const heightOfHookCrain = { // Default Hook and Crain height. heightOfHookCrain
-  crainHeight : 2,
+export const heightOfHookCrane = { // Default Hook and Crain height. heightOfHookCrain
+  craneHeight : 2,
   hookHeight : 6,
 };
 

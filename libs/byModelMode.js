@@ -1,19 +1,19 @@
-const finalCrainInfo = (crainInfo) => {
+const finalCraneInfo = (craneInfo) => {
   let tmpValue = [];
-  crainInfo.map( (info, index) => {
+  craneInfo.map( (info, index) => {
     if(index === 0) tmpValue.push(info);
-    else if(info.crainName !== crainInfo[index-1].crainName)  tmpValue.push(info);  // 크레인이 다르면
-    else if(info.crainModeName !== crainInfo[index-1].crainModeName)  tmpValue.push(info);  // 동일 크레인에서 모드가 다르면
+    else if(info.craneName !== craneInfo[index-1].craneName)  tmpValue.push(info);  // 크레인이 다르면
+    else if(info.craneModeName !== craneInfo[index-1].craneModeName)  tmpValue.push(info);  // 동일 크레인에서 모드가 다르면
   });
   
   return tmpValue;
 };
 
-export default finalCrainInfo;
+export default finalCraneInfo;
 
-// const finalCrainInfo = (crainInfo) => {
+// const finalcraneInfo = (craneInfo) => {
 //   let tmpValue = {
-//     crainName : [],
+//     craneName : [],
 //     info : [],
 //   };
 //   let tmpObject = {
@@ -22,22 +22,22 @@ export default finalCrainInfo;
 //     data : [],
 //   };
 
-//   crainInfo.map( (info, index) => {
+//   craneInfo.map( (info, index) => {
 //     if(index === 0) validation(info, tmpValue, tmpObject);
 //      // 크레인이 다르면
-//     else if(info.crainName !== crainInfo[index-1].crainName)  validation(info, tmpValue, tmpObject);
+//     else if(info.craneName !== craneInfo[index-1].craneName)  validation(info, tmpValue, tmpObject);
 //     // 동일 크레인에서 모드가 다르면
-//     else if(info.crainModeName !== crainInfo[index-1].crainModeName)  validation(info, tmpValue, tmpObject);
+//     else if(info.craneModeName !== craneInfo[index-1].craneModeName)  validation(info, tmpValue, tmpObject);
 //   });
 //   tmpValue.info = tmpObject;
 //   return tmpValue;
 // };
 
 // const validation = (info, tmpValue, tmpObject) => {
-//   tmpValue.crainName.push(info.crainName);
-//   tmpObject.modeName.push(info.crainModeName);
-//   tmpObject.code.push(info.crainCode);
-//   tmpObject.data.push(info.crainData);
+//   tmpValue.craneName.push(info.craneName);
+//   tmpObject.modeName.push(info.craneModeName);
+//   tmpObject.code.push(info.craneCode);
+//   tmpObject.data.push(info.craneData);
 // }
 
-// export default finalCrainInfo;
+// export default finalcraneInfo;
