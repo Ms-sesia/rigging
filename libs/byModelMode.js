@@ -1,12 +1,38 @@
-const finalCraneInfo = (craneInfo) => {
-  let tmpValue = [];
-  craneInfo.map( (info, index) => {
-    if(index === 0) tmpValue.push(info);
-    else if(info.craneName !== craneInfo[index-1].craneName)  tmpValue.push(info);  // 크레인이 다르면
-    else if(info.craneModeName !== craneInfo[index-1].craneModeName)  tmpValue.push(info);  // 동일 크레인에서 모드가 다르면
+const finalCraneInfo = (craneInfo, fileList) => {
+  const modeNameList = ['main', 'fix', 'luffing'];
+  let tmpCraneData = [];
+  let modeMain = [];
+  let modeFix = [];
+  let modeLuffing = [];
+
+  modeNameList.forEach( (modeName, index) => {
+    craneInfo.filter((data) => {  // modeName별로 모아놓은 craneData 배열
+      if(modeName === data.craneModeName){
+        switch (modeName){
+          case 'main' :
+            modeMain.push(data);
+            break;
+          case 'fix' :
+            modeFix.push(data);
+            break;
+          case 'luffing' :
+            // console.log(data);
+            modeLuffing.push(data);
+            break;
+        }
+      }
+    });
   });
-  
-  return tmpValue;
+  fileList.forEach( (filename, index1) => {
+    if(modeMain.find(mainData => mainData.craneName === filename))
+      tmpCraneData.push(modeMain.find(mainData => mainData.craneName === filename));
+    if(modeFix.find(fixData => fixData.craneName === filename))
+      tmpCraneData.push(modeFix.find(fixData => fixData.craneName === filename));
+    if(modeLuffing.find(luffingData => luffingData.craneName === filename))
+      tmpCraneData.push(modeLuffing.find(luffingData => luffingData.craneName === filename));
+  });
+
+  return tmpCraneData;
 };
 
 export default finalCraneInfo;

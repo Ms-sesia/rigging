@@ -11,7 +11,7 @@ const findLuffingSpecTable = (spec, workValue) => {
   for(let i = 0 ; i < spec.weight.length ; i++){
     if(spec.weight[i]) {  // 제원표에 무게 데이터가 존재할 때
       const d2 = spec.distance[i] - d1; // 작업거리 - d1
-      const luffingAngle = Number((Math.acos(d2/spec.luffingFix)*(180/Math.PI)).toFixed(1));
+      const luffingAngle = Number((Math.acos(d2/spec.fixLuffing)*(180/Math.PI)).toFixed(1));
       const h1 = MBoom * Math.sin(spec.mainAngle * Math.PI/180);
       const h2 = spec.luffingFix * Math.sin(luffingAngle*Math.PI/180);
       const marginHeight = h1 + h2 - (workValue.workHeight + heightOfHookCrane.craneHeight + heightOfHookCrane.hookHeight);
@@ -26,9 +26,9 @@ const findLuffingSpecTable = (spec, workValue) => {
             extBoom1 : spec.extBoom1,
             extBoom2 : spec.extBoom2,
             extBoom3 : spec.extBoom3,
-            extMargin : spec.extMargin,
-            luffing : spec.luffingFix,
-            luffingAngle : Number(luffingAngle.toFixed(1)),
+            extMargin : Number(spec.extMargin.toFixed(1)),
+            fixLuffing : spec.fixLuffing,
+            fixLuffingAngle : Number(luffingAngle.toFixed(1)),
             tableDistance : spec.distance[i],
             workDistance : workValue.workDistance,
             distance1 : Number(d1.toFixed(1)),

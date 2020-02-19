@@ -6,5 +6,5 @@ const workValue = { // input value
   workHeight : 50,
 };
 
-// const riggingData = startApp(workValue);
-console.log(startApp(workValue));
+const riggingData = startApp(workValue);
+// console.log(startApp(workValue));

@@ -14,6 +14,7 @@ const excelInfo = filelist.map( (filename) => {
       colum : tableColumLength,
     };
   });
+  
   return {
     fileName : filename,
     sheetname : workbook.SheetNames, // 엑셀파일에서 가져온 시트명.

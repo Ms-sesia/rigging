@@ -13,9 +13,9 @@ const findMainFixSpecTable = (spec, workValue) => {
       // fix, main 모드에서 메인붐 각도는 60~85도
       for(let mainAng = 85 ; mainAng >= 60 ; mainAng--){
         const distance1 = Number((MBoom * Math.cos(mainAng * Math.PI/180)).toFixed(1));
-        const distance2 = Number((spec.luffingFix * Math.cos((mainAng - spec.fixAngle)*Math.PI/180)).toFixed(1));
+        const distance2 = Number((spec.fixLuffing * Math.cos((mainAng - spec.fixAngle)*Math.PI/180)).toFixed(1));
         const height1 = Number((MBoom * Math.sin(mainAng * Math.PI/180)).toFixed(1));
-        const height2 = Number((spec.luffingFix * Math.sin((mainAng - spec.fixAngle) * Math.PI/180)).toFixed(1));
+        const height2 = Number((spec.fixLuffing * Math.sin((mainAng - spec.fixAngle) * Math.PI/180)).toFixed(1));
         const totDist = Math.ceil(distance1 + distance2);
         const marginH = Number((height1 + height2 - (workValue.workHeight + heightOfHookCrane.hookHeight + heightOfHookCrane.craneHeight)).toFixed(1));
         // totalDistance 가 10보다 큰 홀수일 경우 더 적은 무게를 들게끔 totalDistance를 1 더한다.(제원표에서 길이가 짝수).
@@ -32,9 +32,9 @@ const findMainFixSpecTable = (spec, workValue) => {
               extBoom1 : spec.extBoom1,
               extBoom2 : spec.extBoom2,
               extBoom3 : spec.extBoom3,
-              extMargin : spec.extMargin,
-              fix : spec.luffingFix,
-              fixAngle : spec.fixAngle,
+              extMargin : Number(spec.extMargin.toFixed(1)),
+              fixLuffing : spec.fixLuffing,
+              fixLuffingAngle : spec.fixAngle,
               tableDistance : spec.distance[i],
               workDistance : workValue.workDistance,
               distance1 : distance1,
