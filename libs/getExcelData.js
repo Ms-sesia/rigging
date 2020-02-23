@@ -1,4 +1,4 @@
-const offset = 10;
+const offset = 11;
 
 const excelData = (data, alphIndex, length) => {   //data, 행문자, legnth : 45, offset : 5 
   let tmpData = [];

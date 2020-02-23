@@ -1,10 +1,10 @@
 import startApp from "./index";
 
 const workValue = { // input value
-  workWeight : 20,
-  workDistance : 21,
-  workHeight : 50,
+  workWeight : 55,
+  workDistance : 26,
+  workHeight : 45,
 };
 
 const riggingData = startApp(workValue);
-// console.log(startApp(workValue));
+console.log(riggingData);

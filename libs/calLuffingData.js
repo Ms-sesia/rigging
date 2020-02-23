@@ -26,6 +26,7 @@ const findLuffingSpecTable = (spec, workValue) => {
             extBoom1 : spec.extBoom1,
             extBoom2 : spec.extBoom2,
             extBoom3 : spec.extBoom3,
+            extBoom4 : spec.extBoom4,
             extMargin : Number(spec.extMargin.toFixed(1)),
             fixLuffing : spec.fixLuffing,
             fixLuffingAngle : Number(luffingAngle.toFixed(1)),

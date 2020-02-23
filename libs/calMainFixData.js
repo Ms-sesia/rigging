@@ -19,7 +19,7 @@ const findMainFixSpecTable = (spec, workValue) => {
         const totDist = Math.ceil(distance1 + distance2);
         const marginH = Number((height1 + height2 - (workValue.workHeight + heightOfHookCrane.hookHeight + heightOfHookCrane.craneHeight)).toFixed(1));
         // totalDistance 가 10보다 큰 홀수일 경우 더 적은 무게를 들게끔 totalDistance를 1 더한다.(제원표에서 길이가 짝수).
-        if( totDist % 2 !== 0 && totDist > 10 ) totDist += 1;
+        if( totDist % 2 !== 0 && totDist > 11 ) totDist += 1;
         // 여유 높이 > 0 이고 작업무게 이상을 들어야 한다.
         if(marginH > 0 && spec.weight[i] > workValue.workWeight) {
           // d1 + d2 가 작업거리보다 길어야 하고 이 거리가 제원표 거리랑 같을 때
@@ -32,6 +32,7 @@ const findMainFixSpecTable = (spec, workValue) => {
               extBoom1 : spec.extBoom1,
               extBoom2 : spec.extBoom2,
               extBoom3 : spec.extBoom3,
+              extBoom4 : spec.extBoom4,
               extMargin : Number(spec.extMargin.toFixed(1)),
               fixLuffing : spec.fixLuffing,
               fixLuffingAngle : spec.fixAngle,

@@ -28,17 +28,18 @@ const getcraneData = (data, row, colum, modeName, workValue) => {
     tableSpec.extBoom1 = data[charIndex + 4].v;
     tableSpec.extBoom2 = data[charIndex + 5].v;
     tableSpec.extBoom3 = data[charIndex + 6].v;
-    tableSpec.extMargin = data[charIndex + 7].v;
-    tableSpec.fixLuffing = data[charIndex + 8].v;
+    tableSpec.extBoom4 = data[charIndex + 7].v;
+    tableSpec.extMargin = data[charIndex + 8].v;
+    tableSpec.fixLuffing = data[charIndex + 9].v;
     tableSpec.distance = excelData(data, 'A', row);
     tableSpec.weight = excelData(data, charIndex, row);
     
     if(modeName === 'main' || modeName === 'fix'){  // main & fix mode
-      tableSpec.fixAngle = data[charIndex + 9].v;  
+      tableSpec.fixAngle = data[charIndex + 10].v;  
       const Fix = findMainFixSpecTable(tableSpec, workValue);
       if(Fix.length)  finalSpecData.push(Fix);
     } else {  // luffing mode
-      tableSpec.mainAngle = data[charIndex + 9].v;
+      tableSpec.mainAngle = data[charIndex + 10].v;
       const Luffing = findLuffingSpecTable(tableSpec, workValue);
       if(Luffing.length)  finalSpecData.push(Luffing);
     } 
