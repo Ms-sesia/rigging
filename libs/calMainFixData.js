@@ -12,18 +12,18 @@ const findMainFixSpecTable = (spec, workValue) => {
     if(spec.weight[i]) {        
       // fix, main 모드에서 메인붐 각도는 60~85도
       for(let mainAng = 85 ; mainAng >= 60 ; mainAng--){
-        const distance1 = Number((MBoom * Math.cos(mainAng * Math.PI/180)).toFixed(1));
-        const distance2 = Number((spec.fixLuffing * Math.cos((mainAng - spec.fixAngle)*Math.PI/180)).toFixed(1));
-        const height1 = Number((MBoom * Math.sin(mainAng * Math.PI/180)).toFixed(1));
-        const height2 = Number((spec.fixLuffing * Math.sin((mainAng - spec.fixAngle) * Math.PI/180)).toFixed(1));
-        const totDist = Math.ceil(distance1 + distance2);
-        const marginH = Number((height1 + height2 - (workValue.workHeight + heightOfHookCrane.hookHeight + heightOfHookCrane.craneHeight)).toFixed(1));
-        // totalDistance 가 10보다 큰 홀수일 경우 더 적은 무게를 들게끔 totalDistance를 1 더한다.(제원표에서 길이가 짝수).
+        const d1 = Number((MBoom * Math.cos(mainAng * Math.PI/180)).toFixed(1));
+        const d2 = Number((spec.fixLuffing * Math.cos((mainAng - spec.fixAngle) * Math.PI/180)).toFixed(1));
+        const h1 = Number((MBoom * Math.sin(mainAng * Math.PI/180)).toFixed(1));
+        const h2 = Number((spec.fixLuffing * Math.sin((mainAng - spec.fixAngle) * Math.PI/180)).toFixed(1));
+        const totDist = Math.ceil(d1 + d2);
+        const marginH = Number((h1 + h2 + heightOfHookCrane.craneHeight - (workValue.workHeight + heightOfHookCrane.hookHeight)).toFixed(1));
+        // totalDistance 가 11보다 큰 홀수일 경우 더 적은 무게를 들게끔 totalDistance를 1 더한다.(제원표에서 길이가 짝수).
         if( totDist % 2 !== 0 && totDist > 11 ) totDist += 1;
         // 여유 높이 > 0 이고 작업무게 이상을 들어야 한다.
-        if(marginH > 0 && spec.weight[i] > workValue.workWeight) {
+        if(marginH > 0 && spec.weight[i] >= workValue.workWeight) {
           // d1 + d2 가 작업거리보다 길어야 하고 이 거리가 제원표 거리랑 같을 때
-          if( totDist > workValue.workDistance && totDist === spec.distance[i]) {
+          if( totDist >= workValue.workDistance && totDist === spec.distance[i]) {
             const calValue = {  // 출력용 객체, 거리가 먼 것(가벼운 중량을 들 수 있는 것)을 기준으로 출력
               mainBoom : spec.mainBoom,
               mainAngle : mainAng,
@@ -36,15 +36,15 @@ const findMainFixSpecTable = (spec, workValue) => {
               extMargin : Number(spec.extMargin.toFixed(1)),
               fixLuffing : spec.fixLuffing,
               fixLuffingAngle : spec.fixAngle,
+              distance1 : d1,
+              distance2 : d2,
+              totalDistance : Number((d1 + d2).toFixed(1)),
               tableDistance : spec.distance[i],
               workDistance : workValue.workDistance,
-              distance1 : distance1,
-              distance2 : distance2,
-              totalDistance : Number((distance1 + distance2).toFixed(1)),
+              height1 : h1,
+              height2 : h2,
+              totalHeight: Number((h1 + h2 + heightOfHookCrane.craneHeight).toFixed(1)),
               marginHeight : marginH,
-              height1 : height1,
-              height2 : height2,
-              totalHeight: Number((height1 + height2).toFixed(1)),
               workHeight : workValue.workHeight,
               tableWeight : spec.weight[i],
             };

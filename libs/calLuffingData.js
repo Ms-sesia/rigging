@@ -13,11 +13,11 @@ const findLuffingSpecTable = (spec, workValue) => {
       const d2 = spec.distance[i] - d1; // 작업거리 - d1
       const luffingAngle = Number((Math.acos(d2/spec.fixLuffing)*(180/Math.PI)).toFixed(1));
       const h1 = MBoom * Math.sin(spec.mainAngle * Math.PI/180);
-      const h2 = spec.luffingFix * Math.sin(luffingAngle*Math.PI/180);
-      const marginHeight = h1 + h2 - (workValue.workHeight + heightOfHookCrane.craneHeight + heightOfHookCrane.hookHeight);
+      const h2 = spec.fixLuffing * Math.sin(luffingAngle*Math.PI/180);
+      const marginHeight = h1 + h2 + heightOfHookCrane.craneHeight - (workValue.workHeight + heightOfHookCrane.hookHeight);
       // 총 작업거리 > 주어진 작업거리 && (높이 마진(총 높이 - 주어진 높이))> 0
-      if((d1 + d2) > workValue.workDistance && marginHeight > 0) {  
-        if(spec.weight[i] > workValue.workWeight){ 
+      if((d1 + d2) >= workValue.workDistance && marginHeight > 0) {  
+        if(spec.weight[i] >= workValue.workWeight){ 
           const calValue = {  // 출력용 객체
             mainBoom : spec.mainBoom,
             mainAngle : spec.mainAngle,
@@ -30,14 +30,14 @@ const findLuffingSpecTable = (spec, workValue) => {
             extMargin : Number(spec.extMargin.toFixed(1)),
             fixLuffing : spec.fixLuffing,
             fixLuffingAngle : Number(luffingAngle.toFixed(1)),
-            tableDistance : spec.distance[i],
-            workDistance : workValue.workDistance,
             distance1 : Number(d1.toFixed(1)),
             distance2 : Number(d2.toFixed(1)),
             totalDistance : Number((d1 + d2).toFixed(1)),
+            tableDistance : spec.distance[i],
+            workDistance : workValue.workDistance,
             height1 : Number(h1.toFixed(1)),
             height2 : Number(h2.toFixed(1)),
-            totalHeight : Number((h1 + h2).toFixed(1)),
+            totalHeight : Number((h1 + h2 + heightOfHookCrane.craneHeight).toFixed(1)),
             marginHeight : Number(marginHeight.toFixed(1)),
             workHeight : workValue.workHeight,
             tableWeight : spec.weight[i],
