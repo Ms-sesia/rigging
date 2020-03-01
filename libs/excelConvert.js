@@ -1,9 +1,9 @@
 import XLSX from "xlsx";
 import fs from "fs";
 
-const filelist = fs.readdirSync('./excelData');
+export const filelist = fs.readdirSync('./excelData');
 
-const excelInfo = filelist.map( (filename) => {
+export const getTableInfo = filelist.map( (filename) => {
   const workbook = XLSX.readFile(`./excelData/${filename}`);
   let excelLength = [];
   workbook.SheetNames.forEach( (sheetname, index) => {
@@ -16,11 +16,9 @@ const excelInfo = filelist.map( (filename) => {
   });
   
   return {
-    fileName : filename,
+    fileName : filename.split('-')[0],
     sheetname : workbook.SheetNames, // 엑셀파일에서 가져온 시트명.
     data : workbook.Sheets, // 시트의 데이터들. workbook.Sheets[시트명] > 시트명에 해당하는 데이터들
     length : excelLength,
   };
 });
-
-export default excelInfo;

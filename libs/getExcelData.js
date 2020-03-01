@@ -1,6 +1,6 @@
-const offset = 11;
+const offset = 12;
 
-const excelData = (data, alphIndex, length) => {   //data, 행문자, legnth : 45, offset : 5 
+const excelData = (data, alphIndex, length) => {   //data, 행문자, 열 길이, offset : 5 
   let tmpData = [];
   for(let i = offset ; i < length; i++ ){
     //엑셀값이 존재하면
