@@ -16,7 +16,6 @@ const finalCraneInfo = (craneInfo, fileList) => {
             modeFix.push(data);
             break;
           case 'luffing' :
-            // console.log(data);
             modeLuffing.push(data);
             break;
         }

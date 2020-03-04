@@ -9,13 +9,11 @@ const heightOfHookCrane = { // Default Hook and Crain height. heightOfHookCrain
 };
 
 const getcraneData = (data, row, colum, modeName, workValue) => {
-  // let finalSpecData = [];
   let tableSpec = {};
 
   for(let i = 1 ; i < colum ; i++ ){ // B열부터 끝열까지
     let charIndex = numberToAlph(i);  // B, C, D, E, F, ...
     if(i>25) charIndex = numberToAlph(0) + numberToAlph(i - 26);  // Z이후 엑셀은 AA AB AC AD ...
-    
     tableSpec.mainBoom = data[charIndex + 1].v;  // B1, C1, D1, E1, ...
     tableSpec.totalExtLength = data[charIndex + 2].v;
     tableSpec.adapter1 = data[charIndex + 3].v;
@@ -27,29 +25,18 @@ const getcraneData = (data, row, colum, modeName, workValue) => {
     tableSpec.fixLuffing = data[charIndex + 9].v;
     tableSpec.addWeight = data[charIndex + 11].v;
     tableSpec.distance = excelData(data, 'A', row);
-    tableSpec.weight = excelData(data, charIndex, row);
+    tableSpec.weight = excelData(data, charIndex, row, i);
+
     if(modeName === 'main' || modeName === 'fix'){  // main & fix mode
       tableSpec.fixAngle = data[charIndex + 10].v;  
       const Fix = findMainFixSpecTable(tableSpec, workValue, heightOfHookCrane);
-      if(Fix) {
-        return Fix;
-        // finalSpecData.push(Fix);
-        // break;
-      }
+      if(Fix) return Fix;
     } else {  // luffing mode
       tableSpec.mainAngle = data[charIndex + 10].v;
       const Luffing = findLuffingSpecTable(tableSpec, workValue, heightOfHookCrane);
-      if(Luffing) {
-        return Luffing;
-        // finalSpecData.push(Luffing);
-        // break;
-      } 
+      if(Luffing) return Luffing;
     } 
   }
-  // if(finalSpecData.length){
-  //   const firstData = finalSpecData;
-  //   return firstData;
-  // }
 };
 
 export default getcraneData;

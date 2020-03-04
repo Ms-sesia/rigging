@@ -1,10 +1,12 @@
 import XLSX from "xlsx";
 import fs from "fs";
+import path from "path";
 
-export const filelist = fs.readdirSync('./excelData');
+const cwd =  path.join(__dirname,'../','./excelData');
+export const filelist = fs.readdirSync(cwd);
 
 export const getTableInfo = filelist.map( (filename) => {
-  const workbook = XLSX.readFile(`./excelData/${filename}`);
+  const workbook = XLSX.readFile(`${cwd}/${filename}`);
   let excelLength = [];
   workbook.SheetNames.forEach( (sheetname, index) => {
     const tableRowLength = Object.keys(XLSX.utils.sheet_to_json(workbook.Sheets[sheetname], {header : "A"})).length;  // 선택한 시트의 행의 개수
