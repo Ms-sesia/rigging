@@ -26,14 +26,20 @@ const getcraneData = (data, row, colum, modeName, workValue) => {
     tableSpec.addWeight = data[charIndex + 11].v;
     tableSpec.distance = excelData(data, 'A', row);
     tableSpec.weight = excelData(data, charIndex, row, i);
-
+    
     if(modeName === 'main' || modeName === 'fix'){  // main & fix mode
       tableSpec.fixAngle = data[charIndex + 10].v;  
       const Fix = findMainFixSpecTable(tableSpec, workValue, heightOfHookCrane);
+      // data를 넘겼다 받을 필요가 없음.
+      tableSpec.overRear = data[charIndex + 12].v;
+      tableSpec.optional = data[charIndex + 13].v;
       if(Fix) return Fix;
     } else {  // luffing mode
       tableSpec.mainAngle = data[charIndex + 10].v;
       const Luffing = findLuffingSpecTable(tableSpec, workValue, heightOfHookCrane);
+      // data를 넘겼다 받을 필요가 없음.
+      tableSpec.overRear = data[charIndex + 12].v;
+      tableSpec.optional = data[charIndex + 13].v;
       if(Luffing) return Luffing;
     } 
   }

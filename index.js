@@ -1,7 +1,6 @@
 import { getTableInfo } from "./libs/excelConvert";
 import getCraneData from "./libs/getCraneData";
-import modeSelect from "./libs/modeSelect";
-import excelData from "./libs/getExcelData";
+import modeSelect from "./libs/modeSelect";;
 
 const getRiggingData = (workValue) => {
   let craneInfo = []; // 전체 크레인에 대한 리깅가능한 데이터를 모아둔 배열.
