@@ -34,6 +34,9 @@ const findLuffingSpecTable = (spec, workValue, heightOfHookCrane) => {
           marginHeight : Number(marginHeight.toFixed(1)),
           workHeight : workValue.workHeight,
           tableWeight : spec.weight[i],
+          addWeight : spec.addWeight,
+          overRear : spec.overRear,
+          optional : spec.optional,
         };
         return calValue;
       }

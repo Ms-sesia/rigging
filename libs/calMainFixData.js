@@ -39,6 +39,9 @@ const findMainFixSpecTable = (spec, workValue, heightOfHookCrane) => {
               marginHeight : marginH,
               workHeight : workValue.workHeight,
               tableWeight : spec.weight[i],
+              addWeight : spec.addWeight,
+              overRear : spec.overRear,
+              optional : spec.optional,
             };
             return calValue;
           }
