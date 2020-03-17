@@ -30,11 +30,7 @@ const getRiggingData = (workValue) => {
     });
   });
   if(craneInfo.length) {
-    craneInfo.sort( (a, b) => {
-      const nameA = a.craneName.split('_')[1];
-      const nameB = b.craneName.split('_')[1];
-      return a.craneName.split('_')[1] - b.craneName.split('_')[1];
-    });
+    craneInfo.sort( (a, b) => a.craneName.split('_')[1] - b.craneName.split('_')[1] );
     return craneInfo;
   }
 };
