@@ -8,7 +8,7 @@ const heightOfHookCrane = { // Default Hook and Crain height. heightOfHookCrain
   hookHeight : 6,
 };
 
-const getcraneData = (data, row, colum, modeName, workValue) => {
+const getcraneData = (data, row, colum, modeName, workValue, craneDistance) => {
   let tableSpec = {};
 
   for(let i = 1 ; i < colum ; i++ ){ // B열부터 끝열까지
@@ -31,12 +31,12 @@ const getcraneData = (data, row, colum, modeName, workValue) => {
     
     if(modeName === 'MAIN' || modeName === 'FIX' || modeName === 'JIBBOOM'){  // main & fix mode
       tableSpec.fixAngle = data[charIndex + 10].v;  
-      const Fix = findMainFixSpecTable(tableSpec, workValue, heightOfHookCrane);
+      const Fix = findMainFixSpecTable(tableSpec, workValue, heightOfHookCrane, craneDistance);
       // data를 넘겼다 받을 필요가 없음.
       if(Fix) return Fix;
     } else {  // luffing mode
       tableSpec.mainAngle = data[charIndex + 10].v;
-      const Luffing = findLuffingSpecTable(tableSpec, workValue, heightOfHookCrane);
+      const Luffing = findLuffingSpecTable(tableSpec, workValue, heightOfHookCrane, craneDistance);
       // data를 넘겼다 받을 필요가 없음.
       if(Luffing) return Luffing;
     } 

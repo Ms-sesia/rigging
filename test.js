@@ -2,9 +2,9 @@ import startApp from "./index";
 const startTime = new Date().getTime();
 
 const workValue = { // input value
-  workWeight : 5,
-  workDistance : 7,
-  workHeight : 7,
+  workWeight : 40,
+  workDistance : 8,
+  workHeight : 42,
 };
 
 const riggingData = startApp(workValue);
