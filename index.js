@@ -15,6 +15,7 @@ const getRiggingData = (workValue) => {
       const craneCode = sheetName.split('_')[0];  // TN, TY3, TNZF, TYVENZF 등 모드별 이름
       const modeName = modeSelect(sheetName); // main, fix, luffing 구분
       const craneData = getCraneData(excelInfo.data[sheetName], raw, colum, modeName, workValue, craneDistance); // 작업값을 만족하는 craneData 계산
+      console.log(`craneName : ${craneName} \tcraneCode : ${craneCode}`);
       if(craneData){  // 작업값들을 만족하는 제원표의 계산데이터
         if(preCraneCode !== craneCode){
           craneInfo.push({
