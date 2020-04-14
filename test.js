@@ -13,12 +13,12 @@ const startTime = new Date().getTime();
 // };
 const workValue = { // input value
   workWeight : 1,
-  workDistance : 137,
+  workDistance : 126,
   workHeight : 47,
 };
 
 const riggingData = startApp(workValue);
-console.log(riggingData);
+// console.log(riggingData);
 
 const endTime = new Date().getTime(); 
-console.log(endTime - startTime);
+// console.log(endTime - startTime);
