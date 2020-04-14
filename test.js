@@ -1,24 +1,24 @@
 import startApp from "./index";
 const startTime = new Date().getTime();
 
-// const workValue = { // input value
+// const workValue = { // input value Unity test1
 //   workWeight : 20,
 //   workDistance : 12,
 //   workHeight : 28,
 // };
-// const workValue = { // input value
+// const workValue = { // input value Unity test2
 //   workWeight : 5,
 //   workDistance : 28,
 //   workHeight : 28,
 // };
 const workValue = { // input value
-  workWeight : 1,
-  workDistance : 126,
-  workHeight : 47,
+  workWeight : 20,
+  workDistance : 128,
+  workHeight : 40,
 };
 
 const riggingData = startApp(workValue);
-// console.log(riggingData);
+console.log(riggingData);
 
 const endTime = new Date().getTime(); 
 // console.log(endTime - startTime);
