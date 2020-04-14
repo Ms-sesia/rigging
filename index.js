@@ -5,14 +5,12 @@ import getCraneDistance from "./libs/getCraneDistance";
 
 const getRiggingData = (workValue) => {
   // 초과치 입력시 처리. 한계조건 : 무게 1200, 작업높이 136, 작업거리 136
-  if(workValue.workWeight > 1200)   return '작업무게 값이 리깅 범위를 초과합니다.';
-  if(workValue.workHeight > 170)    return '작업높이 값이 리깅 범위를 초과합니다.';
-  if(workValue.workDistance > 129)  return '작업거리 값이 리깅 범위를 초과합니다.';
-  if(workValue.workWeight < 1)      return '작업무게 값이 너무 낮습니다.';
-  if(workValue.workHeight < 1)      return '작업높이 값이 너무 낮습니다.';
-  if(workValue.workDistance < 1)    return '작업거리 값이 너무 낮습니다.';
+  let craneInfo = new Array; // 전체 크레인에 대한 리깅가능한 데이터를 모아둔 배열.
 
-  let craneInfo = []; // 전체 크레인에 대한 리깅가능한 데이터를 모아둔 배열.
+  if(workValue.workWeight > 1200 || workValue.workHeight > 170 || workValue.workDistance > 129 ||workValue.workWeight < 1 || workValue.workHeight < 1 || workValue.workDistance < 1){
+    console.log("입력한 조건값이 올바르지 않습니다.");
+    return craneInfo;
+  }
   getTableInfo.forEach( (excelInfo) => {  // 엑셀파일 전부
     let preCraneCode = '';
     const craneName = excelInfo.fileName; // 500t, 750t, 1200t 구분
