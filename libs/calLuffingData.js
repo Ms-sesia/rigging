@@ -10,7 +10,7 @@ const riggingData = (spec, index, workValue, heightOfHookCrane, craneDistance, p
     extBoom4 : spec.extBoom4,
     adapter2 : Number(spec.adapter2.toFixed(1)),
     fixLuffing : spec.fixLuffing,
-    fixLuffingAngle : Number((spec.mainAngle - params.luffingAngle).toFixed(1)),
+    fixLuffingAngle : Number(spec.mainAngle - params.luffingAngle.toFixed(1)),
     craneRearDistance : craneDistance,
     distance1 : Number(params.d1.toFixed(1)),
     distance2 : Number(params.d2.toFixed(1)),
@@ -34,13 +34,13 @@ const riggingData = (spec, index, workValue, heightOfHookCrane, craneDistance, p
 
 const findLuffingSpecTable = (spec, workValue, heightOfHookCrane, craneDistance) => {
   // 삼각함수 : Math.cos(x*Math.PI/180) 각도는 라디안 표기
-  const MBoom = spec.mainBoom + spec.totalExtLength;// mainBoom + totalExtLength
-  const d1 = MBoom * Math.cos(spec.mainAngle * Math.PI/180);  // luffing에서 d1은 메인붐과 메인붐각도가 정해져있기 때문에 고정
   const minAngle = Number((Math.atan((workValue.workHeight - heightOfHookCrane.craneHeight)/craneDistance)*(180/Math.PI)).toFixed(1));  // 크레인이 건물과 맞닿아있을 때의 각도(메인붐이 건물과 닿지 않을 최소각도)
   // 메인각도가 크레인이 건물과 맞닿아 있을 때의 각도보다 커야한다.
   if(spec.mainAngle > minAngle){
     for(let i = 0 ; i < spec.weight.length ; i++){
       if(spec.weight[i] >= workValue.workWeight) {  // weight가 있어야하고 작업무게 이상이어야 한다.
+        const MBoom = spec.mainBoom + spec.totalExtLength;// mainBoom + totalExtLength
+        const d1 = MBoom * Math.cos(spec.mainAngle * Math.PI/180);  // luffing에서 d1은 메인붐과 메인붐각도가 정해져있기 때문에 고정
         const params = {
           d1 : d1,
           d2 : spec.distance[i] - d1, // 작업거리 - d1

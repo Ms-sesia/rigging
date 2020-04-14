@@ -34,15 +34,15 @@ const riggingData = (spec, index, workValue, heightOfHookCrane, craneDistance, p
 
 const findMainFixSpecTable = (spec, workValue, heightOfHookCrane, craneDistance) => {
   // 삼각함수 : Math.cos(x*Math.PI/180) 각도는 라디안 표기
-  const MBoom = spec.mainBoom + spec.totalExtLength;// mainBoom + totalExtLength
-  const minAngle = Number((Math.atan((workValue.workHeight - heightOfHookCrane.craneHeight)/craneDistance)*(180/Math.PI)).toFixed(1));  // 크레인이 건물과 맞닿아있을 때의 각도(메인붐이 건물과 닿지 않을 최소각도)
   for(let i = 0 ; i < spec.weight.length ; i++){
     //제원표에 무게 데이터가 존재 할 때 
     if(spec.weight[i] >= workValue.workWeight) {  // weight가 작업무게 이상이어야 한다.
       // fix, main 모드에서 메인붐 각도는 60~85도
       for(let mainAng = 85 ; mainAng >= 60 ; mainAng--){
+        const minAngle = Number((Math.atan((workValue.workHeight - heightOfHookCrane.craneHeight)/craneDistance)*(180/Math.PI)).toFixed(1));  // 크레인이 건물과 맞닿아있을 때의 각도(메인붐이 건물과 닿지 않을 최소각도)
         // 메인각도가 크레인이 건물과 맞닿아 있을 때의 각도보다 커야한다.
         if(mainAng > minAngle){
+          const MBoom = spec.mainBoom + spec.totalExtLength;// mainBoom + totalExtLength
           const params = {
             mainAng : mainAng,
             d1 : Number((MBoom * Math.cos(mainAng * Math.PI/180)).toFixed(1)),
