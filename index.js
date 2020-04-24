@@ -17,7 +17,7 @@ const getRiggingData = (workValue) => {
     const craneDistance = getCraneDistance(craneName);
     if(craneName === 'LTM_1500_50m' || craneName === 'LTM_1500_84m'){
       excelInfo.sheetname.map( (sheetName, index) => { // 엑셀 파일의 sheet
-        // if(sheetName === 'T3YV2VEN_202t_TAB1783868.4'){
+        // if(sheetName === 'TVY3F_165t_TAB221431.2'){
           const raw = excelInfo.length[index].raw;  // sheet의 raw 길이
           const colum = excelInfo.length[index].colum;  // sheet의 colum 길이
           const craneCode = sheetName.split('_')[0];  // TN, TY3, TNZF, TYVENZF 등 모드별 이름
@@ -35,8 +35,8 @@ const getRiggingData = (workValue) => {
               preCraneCode = craneCode;
             }
           }
-        }
-      )
+      //  }
+      })
     }
   });
   if(craneInfo.length) {

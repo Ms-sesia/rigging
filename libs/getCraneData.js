@@ -34,9 +34,9 @@ const getcraneData = (data, row, colum, modeName, workValue, craneDistance) => {
       const Fix = findMainFixSpecTable(tableSpec, workValue, heightOfHookCrane, craneDistance);
       if(Fix) return Fix;
     } else {  // luffing mode
-      tableSpec.mainAngle = data[charIndex + 10].v;
-      const Luffing = findLuffingSpecTable(tableSpec, workValue, heightOfHookCrane, craneDistance);
-      if(Luffing) return Luffing;
+      // tableSpec.mainAngle = data[charIndex + 10].v;
+      // const Luffing = findLuffingSpecTable(tableSpec, workValue, heightOfHookCrane, craneDistance);
+      // if(Luffing) return Luffing;
     } 
   }
 };
