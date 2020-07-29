@@ -12,9 +12,9 @@ const startTime = new Date().getTime();
 //   workHeight : 28,
 // };
 const workValue = { // input value
-  workWeight : 8,
-  workDistance : 32,
-  workHeight : 25,
+  workWeight : 5,
+  workDistance : 20,
+  workHeight : 80,
 };
 
 const riggingData = startApp(workValue);

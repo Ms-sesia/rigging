@@ -16,7 +16,7 @@ const riggingData = (spec, index, workValue, heightOfHookCrane, craneDistance, p
     craneRearDistance : craneDistance,
     distance1 : params.d1,
     distance2 : params.d2,
-    centerToBuldingDistance : Number((spec.distance[index] - workValue.workDistance).toFixed(1)),
+    centerToBuildingDistance : Number((spec.distance[index] - workValue.workDistance).toFixed(1)),
     rearToBuildingDistance : Number((spec.distance[index] - craneDistance - workValue.workDistance).toFixed(1)),
     totalDistance : Number((params.d1 + params.d2).toFixed(1)),
     tableDistance : spec.distance[index],
@@ -31,12 +31,13 @@ const riggingData = (spec, index, workValue, heightOfHookCrane, craneDistance, p
     overRear : spec.overRear,
     optional : spec.optional,
     workWeight : workValue.workWeight,
+    safetyFactor : params.safetyFactor
   };
 }
 
 const findMainFixSpecTable = (spec, workValue, heightOfHookCrane, craneDistance) => {
   for(let i = 0 ; i < spec.weight.length ; i++){
-    if(spec.weight[i] >= workValue.workWeight) {  // weight data가 있어야하고 작업무게 이상이어야 한다.
+    if(spec.weight[i] >= workValue.workWeight && workValue.workWeight/spec.weight[i]*100 <= 75) {  // weight data가 있어야하고 작업무게 이상이어야 한다.
       // fix, main 모드에서 메인붐 각도는 60~85도
       for(let mainAngle = 85 ; mainAngle >= 60 ; mainAngle--){
         // 삼각함수 : Math.cos(x*Math.PI/180) 각도는 라디안 표기
@@ -47,6 +48,7 @@ const findMainFixSpecTable = (spec, workValue, heightOfHookCrane, craneDistance)
           d2 : spec.fixLuffing * Math.cos((mainAngle - spec.fixAngle) * Math.PI/180),
           h1 : MBoom * Math.sin(mainAngle * Math.PI/180),
           h2 : spec.fixLuffing * Math.sin((mainAngle - spec.fixAngle) * Math.PI/180),
+          safetyFactor : Number((workValue.workWeight/spec.weight[i]*100).toFixed(1))
         }
         params.totalDist = params.d1 + params.d2;
         if(params.totalDist > spec.distance[i-1] && params.totalDist <= spec.distance[i]){ // totalDistance가 현재 제원표 거리보다 작거나 같고 이전 제원표 거리보다 클 경우
@@ -54,9 +56,9 @@ const findMainFixSpecTable = (spec, workValue, heightOfHookCrane, craneDistance)
             if(workValue.workHeight > params.h1){ // 작업높이가 h1보다 클 때
               const fixAngle2 = Number((Math.atan((workValue.workHeight - heightOfHookCrane.craneHeight - params.h1) / (craneDistance - params.d1))*(180/Math.PI)).toFixed(1));  // d1지점에서 건물까지의 대각선 각도
               if( (mainAngle - spec.fixAngle) > fixAngle2)
-                return riggingData(spec, i, workValue, heightOfHookCrane, craneDistance, params);
-            } else if(workValue.workHeight < params.h1)  // 작업높이가 h1보다 작을 때
               return riggingData(spec, i, workValue, heightOfHookCrane, craneDistance, params);
+            } else if(workValue.workHeight < params.h1)  // 작업높이가 h1보다 작을 때
+            return riggingData(spec, i, workValue, heightOfHookCrane, craneDistance, params);
           } else if(workValue.workDistance > params.d2 && workValue.workDistance < spec.distance[i] - craneDistance) { // 작업시작위치가 d1-크레인거리 에서 d2사이일 때.
             const mainAngle2 = Number((Math.atan((workValue.workHeight - heightOfHookCrane.craneHeight)/(spec.distance[i] - workValue.workDistance))*(180/Math.PI)).toFixed(1));  // 크레인이 건물과 맞닿아있을 때의 각도(메인붐이 건물과 닿지 않을 최소각도)
             if(mainAngle > mainAngle2)

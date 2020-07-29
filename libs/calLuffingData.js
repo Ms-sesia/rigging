@@ -17,7 +17,7 @@ const riggingData = (spec, index, workValue, heightOfHookCrane, craneDistance, p
     craneRearDistance : craneDistance,
     distance1 : Number(params.d1.toFixed(1)),
     distance2 : Number(params.d2.toFixed(1)),
-    centerToBuldingDistance : Number((spec.distance[index] - workValue.workDistance).toFixed(1)),
+    centerToBuildingDistance : Number((spec.distance[index] - workValue.workDistance).toFixed(1)),
     rearToBuildingDistance : Number((spec.distance[index] - craneDistance - workValue.workDistance).toFixed(1)),
     totalDistance : Number((params.d1 + params.d2).toFixed(1)),
     tableDistance : spec.distance[index],
@@ -32,12 +32,13 @@ const riggingData = (spec, index, workValue, heightOfHookCrane, craneDistance, p
     overRear : spec.overRear,
     optional : spec.optional,
     workWeight : workValue.workWeight,
+    safetyFactor : params.safetyFactor
   };
 }
 
 const findLuffingSpecTable = (spec, workValue, heightOfHookCrane, craneDistance) => {
   for(let i = 0 ; i < spec.weight.length ; i++){
-    if(spec.weight[i] >= workValue.workWeight) {  // weight data가 있어야하고 작업무게 이상이어야 한다.
+    if(spec.weight[i] >= workValue.workWeight && workValue.workWeight/spec.weight[i]*100 <= 75) {  // weight data가 있어야하고 작업무게 이상이어야 한다.
       let params = {};
       const MBoom = spec.mainBoom + spec.totalExtLength;// mainBoom + totalExtLength
       // 삼각함수 : Math.cos(x*Math.PI/180) 각도는 라디안 표기
@@ -46,6 +47,7 @@ const findLuffingSpecTable = (spec, workValue, heightOfHookCrane, craneDistance)
       params.luffingAngle = Number((Math.acos(params.d2/spec.fixLuffing)*(180/Math.PI)).toFixed(1));  // 지면과 수평으로부터 올라오는 러핑 각도
       params.h1 = MBoom * Math.sin(spec.mainAngle * Math.PI/180);
       params.h2 = spec.fixLuffing * Math.sin(params.luffingAngle * Math.PI/180);
+      params.safetyFactor = Number((workValue.workWeight/spec.weight[i]*100).toFixed(1));
       if(workValue.workDistance < params.d2){ // 작업거리가 d2보다 작을 때
         if(workValue.workHeight > params.h1){ // 작업높이가 h1보다 클 때
           const luffingAngle2 = Number((Math.atan( (workValue.workHeight - heightOfHookCrane.craneHeight - params.h1) / (params.d2 - workValue.workDistance) )*(180/Math.PI)).toFixed(1));  // d2 시작 지점에서 건물까지의 대각선 각도
