@@ -38,7 +38,8 @@ const riggingData = (spec, index, workValue, heightOfHookCrane, craneDistance, p
 
 const findLuffingSpecTable = (spec, workValue, heightOfHookCrane, craneDistance) => {
   for(let i = 0 ; i < spec.weight.length ; i++){
-    if(spec.weight[i] >= workValue.workWeight && workValue.workWeight/spec.weight[i]*100 <= 75) {  // weight data가 있어야하고 작업무게 이상이어야 한다.
+    // if(spec.weight[i] >= workValue.workWeight && workValue.workWeight/spec.weight[i]*100 <= 75) {  // weight data가 있어야하고 작업무게 이상이어야 한다.
+    if(spec.weight[i] >= workValue.workWeight) {  // weight data가 있어야하고 작업무게 이상이어야 한다.
       let params = {};
       const MBoom = spec.mainBoom + spec.totalExtLength;// mainBoom + totalExtLength
       // 삼각함수 : Math.cos(x*Math.PI/180) 각도는 라디안 표기
@@ -49,12 +50,12 @@ const findLuffingSpecTable = (spec, workValue, heightOfHookCrane, craneDistance)
       params.h2 = spec.fixLuffing * Math.sin(params.luffingAngle * Math.PI/180);
       params.safetyFactor = Number((workValue.workWeight/spec.weight[i]*100).toFixed(1));
       if(workValue.workDistance < params.d2){ // 작업거리가 d2보다 작을 때
-        if(workValue.workHeight > params.h1){ // 작업높이가 h1보다 클 때
+        if(workValue.workHeight > (params.h1 + heightOfHookCrane.craneHeight)){ // 작업높이가 h1보다 클 때
           const luffingAngle2 = Number((Math.atan( (workValue.workHeight - heightOfHookCrane.craneHeight - params.h1) / (params.d2 - workValue.workDistance) )*(180/Math.PI)).toFixed(1));  // d2 시작 지점에서 건물까지의 대각선 각도
           if(params.luffingAngle > luffingAngle2){
             return riggingData(spec, i, workValue, heightOfHookCrane, craneDistance, params);
           }
-        } else if(workValue.workHeight < params.h1){ // 작업높이가 h1보다 작을 때
+        } else if(workValue.workHeight < (params.h1 + heightOfHookCrane.craneHeight)){ // 작업높이가 h1보다 작을 때
           return riggingData(spec, i, workValue, heightOfHookCrane, craneDistance, params);
         }
       } else if(workValue.workDistance > params.d2 && workValue.workDistance < spec.distance[i] - craneDistance){  // 작업 시작위치가 d1-크레인거리 에서 d2사이일 때.

@@ -15,12 +15,7 @@ const getRiggingData = (workValue) => {
     let preCraneCode = '';
     const craneName = excelInfo.fileName; // 500t, 750t, 1200t 구분
     const craneDistance = getCraneDistance(craneName);
-    // if(craneName === 'LTM_1500_50m' || craneName === 'LTM_1500_84m'){
-    // if(craneName === 'LTM_1500_84m'){
     excelInfo.sheetname.map( (sheetName, index) => { // 엑셀 파일의 sheet
-      // if(/TY3NZF/g.test(sheetName.split('_')[0])){
-      // if(sheetName === 'TY3NZF_165t_TAB231412.1'){
-      // console.log(craneName, sheetName);
       const raw = excelInfo.length[index].raw;  // sheet의 raw 길이
       const colum = excelInfo.length[index].colum;  // sheet의 colum 길이
       const craneCode = sheetName.split('_')[0];  // TN, TY3, TNZF, TYVENZF 등 모드별 이름
@@ -38,9 +33,7 @@ const getRiggingData = (workValue) => {
           preCraneCode = craneCode;
         }
       }
-      // }
     })
-    // }
   });
   if(craneInfo.length) {
     craneInfo.sort( (a, b) => a.craneName.split('_')[1] - b.craneName.split('_')[1] );  // 크레인이름 오름차순 정렬
