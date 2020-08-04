@@ -1,11 +1,6 @@
 const riggingData = (spec, index, workValue, heightOfHookCrane, craneDistance, params) => {
   const marginHeight = Number(
-    (
-      params.h1 +
-      params.h2 +
-      heightOfHookCrane.craneHeight -
-      (workValue.workHeight + heightOfHookCrane.hookHeight)
-    ).toFixed(1)
+    (params.h1 + params.h2 + heightOfHookCrane.craneHeight - (workValue.workHeight + heightOfHookCrane.hookHeight)).toFixed(1)
   );
 
   if (marginHeight > 0)
@@ -30,8 +25,8 @@ const riggingData = (spec, index, workValue, heightOfHookCrane, craneDistance, p
       totalDistance: Number((params.d1 + params.d2).toFixed(1)),
       tableDistance: spec.distance[index],
       workDistance: workValue.workDistance,
-      height1: params.h1,
-      height2: params.h2,
+      height1: Number((params.h1).toFixed(1)),
+      height2: Number((params.h2).toFixed(1)),
       totalHeight: Number((params.h1 + params.h2 + heightOfHookCrane.craneHeight).toFixed(1)),
       marginHeight: marginHeight,
       workHeight: workValue.workHeight,
@@ -40,7 +35,7 @@ const riggingData = (spec, index, workValue, heightOfHookCrane, craneDistance, p
       overRear: spec.overRear,
       optional: spec.optional,
       workWeight: workValue.workWeight,
-      safetyFactor: params.safetyFactor,
+      safetyFactor: params.safetyFactor,  // 안전율
     };
 };
 
@@ -62,36 +57,57 @@ const findMainFixSpecTable = (spec, workValue, heightOfHookCrane, craneDistance)
           safetyFactor: Number(((workValue.workWeight / spec.weight[i]) * 100).toFixed(1)),
         };
         params.totalDist = params.d1 + params.d2;
-        const blockAngle = Number((Math.atan((workValue.blockHeight - heightOfHookCrane.craneHeight) / (tableDistance - workValue.blockDistance - workValue.workDistance)) * ( 180 / Math.PI )).toFixed(1));
         const BWDistance = workValue.workDistance + workValue.blockDistance;
-        if (params.totalDist > spec.distance[i - 1] && params.totalDist <= spec.distance[i]) { // totalDistance가 현재 제원표 거리보다 작거나 같고 이전 제원표 거리보다 클 경우
-          if(workValue.blockDistance){
-            if (workValue.workDistance < params.d2) { // 작업거리가 d2보다 작을 때
-              if (workValue.workHeight > params.h1 + heightOfHookCrane.craneHeight) { // 작업높이가 h1보다 클 때
-                const fixAngle2 = Number((Math.atan((workValue.workHeight - heightOfHookCrane.craneHeight - params.h1) / (craneDistance - params.d1)) * (180 / Math.PI)).toFixed(1)); // d1지점에서 건물까지의 대각선 각도
-                if (mainAngle - spec.fixAngle > fixAngle2)
+        // 장애물이 있을 때 크레인으로부터의 각도
+        let blockAngle = 0;
+        if(workValue.blockHeight) blockAngle = Number((Math.atan((workValue.blockHeight - heightOfHookCrane.craneHeight) / (spec.distance[i] - BWDistance)) * ( 180 / Math.PI )).toFixed(1));
+        
+        if(params.totalDist > spec.distance[i-1] && params.totalDist <= spec.distance[i]){
+          // -------------------------------- 장애물 추가 시 리깅 조건 계산
+          // 1. 작업높이가 장애물높이보다 작을 때
+          if(workValue.workHeight < workValue.blockHeight) {
+            // 1) 장애물거리 + 작업거리가 d2와 크레인 시작점 사이일 때 && mainAngle이 blockAngle보다 클 때
+            if( params.d2 < BWDistance && BWDistance < (spec.distance[i] - craneDistance) && blockAngle < mainAngle ){ 
+              // 1] h1+크레인높이 > 장애물 높이
+              if(params.h1 + heightOfHookCrane.craneHeight > workValue.blockHeight)
+                return riggingData(spec, i, workValue, heightOfHookCrane, craneDistance, params);
+            // 2) 장애물거리 + 작업거리가 d2보다 작을 때 && mainAngle이 blockAngle보다 클 때
+            } else if(params.d2 > BWDistance && blockAngle < mainAngle) {
+              // 1] h1+크레인높이 > 장애물 높이
+              if(params.h1 + heightOfHookCrane.craneHeight > workValue.blockHeight)
+                return riggingData(spec, i, workValue, heightOfHookCrane, craneDistance, params);
+              // 2] h1+크레인높이 < 장애물 높이
+              else if (params.h1 + heightOfHookCrane.craneHeight < workValue.blockHeight){
+                const fixAngle2 = Number((Math.atan((workValue.blockHeight - params.h1 - heightOfHookCrane.craneHeight) / (params.d2 - BWDistance)) * (180 / Math.PI)).toFixed(1)); // 픽스(러핑) 시작지점에서 건물까지의 대각선 각도
+                if(fixAngle2 < spec.fixAngle) 
                   return riggingData(spec, i, workValue, heightOfHookCrane, craneDistance, params);
-              } else if (workValue.workHeight < params.h1 + heightOfHookCrane.craneHeight) // 작업높이가 h1보다 작을 때
-                return riggingData(spec, i, workValue, heightOfHookCrane, craneDistance, params);
-            } else if (BWDistance > params.d2 && BWDistance < spec.distance[i] - craneDistance) { // 작업시작위치가 d1-크레인거리 에서 d2사이일 때.
-              const mainAngle2 = Number(
-                ( Math.atan((workValue.workHeight - heightOfHookCrane.craneHeight) / (spec.distance[i] - workValue.workDistance)) * (180 / Math.PI)).toFixed(1)); // 크레인이 건물과 맞닿아있을 때의 각도(메인붐이 건물과 닿지 않을 최소각도)
-              if (mainAngle > mainAngle2)
-                return riggingData(spec, i, workValue, heightOfHookCrane, craneDistance, params);
+              }
             }
-          } else {
-            if (workValue.workDistance < params.d2) { // 작업거리가 d2보다 작을 때
-              if (workValue.workHeight > params.h1 + heightOfHookCrane.craneHeight) { // 작업높이가 h1보다 클 때
-                const fixAngle2 = Number((Math.atan((workValue.workHeight - heightOfHookCrane.craneHeight - params.h1) / (craneDistance - params.d1)) * (180 / Math.PI)).toFixed(1)); // d1지점에서 건물까지의 대각선 각도
-                if (mainAngle - spec.fixAngle > fixAngle2)
+          // 2. 작업높이가 장애물높이보다 클 때
+          } else if(workValue.workHeight > workValue.blockHeight){
+            // 1) 장애물거리 + 작업거리가 d2와 크레인 시작점 사이일 때 && mainAngle이 blockAngle보다 클 때 && mainAngle이 건물까지의 각도인 minMainAngle보다 클 때
+            const minMainAngle = Number((Math.atan((workValue.workHeight - heightOfHookCrane.craneHeight) / (spec.distance[i] - workValue.workDistance)) * ( 180 / Math.PI )).toFixed(1));
+            if( params.d2 < BWDistance && BWDistance < (spec.distance[i] - craneDistance) && blockAngle < mainAngle && minMainAngle < mainAngle){ 
+              // 1] h1 + 크레인높이 > 작업높이
+              if(params.h1 + heightOfHookCrane.craneHeight > workValue.workHeight)
+                return riggingData(spec, i, workValue, heightOfHookCrane, craneDistance, params);
+              // 2] h1 + 크레인높이 < 작업높이
+              else if(params.h1 + heightOfHookCrane.craneHeight < workValue.workHeight){
+                const fixAngle2 = Number((Math.atan((workValue.workHeight - params.h1 - heightOfHookCrane.craneHeight) / (params.d2 - workValue.workDistance)) * (180 / Math.PI)).toFixed(1)); // 픽스(러핑) 시작지점에서 건물까지의 대각선 각도
+                if( fixAngle2 < spec.fixAngle)
                   return riggingData(spec, i, workValue, heightOfHookCrane, craneDistance, params);
-              } else if (workValue.workHeight < params.h1 + heightOfHookCrane.craneHeight) // 작업높이가 h1보다 작을 때
+              }
+            // 2) 장애물거리 + 작업거리가 d2보다 작을 때 && mainAngle이 blockAngle보다 클 때
+            } else if(params.d2 > BWDistance && blockAngle < mainAngle && minMainAngle < mainAngle) {
+              // 1] h1 + 크레인높이 > 작업높이
+              if(params.h1 + heightOfHookCrane.craneHeight > workValue.workHeight)
                 return riggingData(spec, i, workValue, heightOfHookCrane, craneDistance, params);
-            } else if (workValue.workDistance > params.d2 && workValue.workDistance < spec.distance[i] - craneDistance) { // 작업시작위치가 d1-크레인거리 에서 d2사이일 때.
-              const mainAngle2 = Number(
-                ( Math.atan((workValue.workHeight - heightOfHookCrane.craneHeight) / (spec.distance[i] - workValue.workDistance)) * (180 / Math.PI)).toFixed(1)); // 크레인이 건물과 맞닿아있을 때의 각도(메인붐이 건물과 닿지 않을 최소각도)
-              if (mainAngle > mainAngle2)
-                return riggingData(spec, i, workValue, heightOfHookCrane, craneDistance, params);
+              // 2] h1 + 크레인높이 < 작업높이
+              else if (params.h1 + heightOfHookCrane.craneHeight < workValue.blockHeight){
+                const fixAngle2 = Number((Math.atan((workValue.workHeight - params.h1 - heightOfHookCrane.craneHeight) / (params.d2 - workValue.workDistance)) * (180 / Math.PI)).toFixed(1)); // 픽스(러핑) 시작지점에서 건물까지의 대각선 각도
+                if(fixAngle2 < spec.fixAngle) 
+                  return riggingData(spec, i, workValue, heightOfHookCrane, craneDistance, params);
+              }
             }
           }
         }
@@ -100,4 +116,24 @@ const findMainFixSpecTable = (spec, workValue, heightOfHookCrane, craneDistance)
   }
 };
 
+
+// 장애물이 없을 때 fix 알고리즘
+        
+        // if (workValue.workDistance < params.d2) { // 작업거리가 d2보다 작을 때
+        //   if (workValue.workHeight > params.h1 + heightOfHookCrane.craneHeight) { // 작업높이가 h1보다 클 때
+        //     const fixAngle2 = Number((Math.atan((workValue.workHeight - heightOfHookCrane.craneHeight - params.h1) / (craneDistance - params.d1)) * (180 / Math.PI)).toFixed(1)); // d1지점에서 건물까지의 대각선 각도
+        //     if (mainAngle - spec.fixAngle > fixAngle2)
+        //       return riggingData(spec, i, workValue, heightOfHookCrane, craneDistance, params);
+        //   } else if (workValue.workHeight < params.h1 + heightOfHookCrane.craneHeight) // 작업높이가 h1보다 작을 때
+        //     return riggingData(spec, i, workValue, heightOfHookCrane, craneDistance, params);
+        // } else if (workValue.workDistance > params.d2 && workValue.workDistance < spec.distance[i] - craneDistance) { // 작업시작위치가 d1-크레인거리 에서 d2사이일 때.
+        //   const mainAngle2 = Number(
+        //     ( Math.atan((workValue.workHeight - heightOfHookCrane.craneHeight) / (spec.distance[i] - workValue.workDistance)) * (180 / Math.PI)).toFixed(1)); // 크레인이 건물과 맞닿아있을 때의 각도(메인붐이 건물과 닿지 않을 최소각도)
+        //   if (mainAngle > mainAngle2)
+        //     return riggingData(spec, i, workValue, heightOfHookCrane, craneDistance, params);
+        // }
+
 export default findMainFixSpecTable;
+
+
+
