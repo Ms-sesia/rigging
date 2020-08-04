@@ -6,10 +6,10 @@
   "author": "Sesia",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "^7.8.4",
-    "@babel/node": "^7.8.4",
-    "@babel/preset-env": "^7.8.4",
-    "xlsx": "^0.14.3"
+    "@babel/core": "^7.11.0",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.11.0",
+    "xlsx": "^0.14.5"
   },
   "scripts": {
     "start": "babel-node test.js"

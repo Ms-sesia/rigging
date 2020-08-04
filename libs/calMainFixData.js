@@ -57,6 +57,10 @@ const findMainFixSpecTable = (spec, workValue, heightOfHookCrane, craneDistance)
           safetyFactor: Number(((workValue.workWeight / spec.weight[i]) * 100 * 100 / 85).toFixed(1)),
         };
         params.totalDist = params.d1 + params.d2;
+        if(workValue.blockHeight === undefined)
+          workValue.blockHeight = 0;
+        if(workValue.blockDistance === undefined)
+          workValue.blockDistance = 0;
         const BWDistance = workValue.workDistance + workValue.blockDistance;
         // 장애물이 있을 때 크레인으로부터의 각도
         let blockAngle = 0;
