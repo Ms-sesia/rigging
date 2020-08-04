@@ -18,8 +18,8 @@ const riggingData = (spec, index, workValue, heightOfHookCrane, craneDistance, p
       fixLuffing: spec.fixLuffing,
       fixLuffingAngle: spec.fixAngle,
       craneRearDistance: craneDistance,
-      distance1: params.d1,
-      distance2: params.d2,
+      distance1: Number((params.d1).toFixed(1)),
+      distance2: Number((params.d2).toFixed(1)),
       centerToBuildingDistance: Number((spec.distance[index] - workValue.workDistance).toFixed(1)),
       rearToBuildingDistance: Number((spec.distance[index] - craneDistance - workValue.workDistance).toFixed(1)),
       totalDistance: Number((params.d1 + params.d2).toFixed(1)),
@@ -54,7 +54,7 @@ const findMainFixSpecTable = (spec, workValue, heightOfHookCrane, craneDistance)
           d2: spec.fixLuffing * Math.cos(((mainAngle - spec.fixAngle) * Math.PI) / 180),
           h1: MBoom * Math.sin((mainAngle * Math.PI) / 180),
           h2: spec.fixLuffing * Math.sin(((mainAngle - spec.fixAngle) * Math.PI) / 180),
-          safetyFactor: Number(((workValue.workWeight / spec.weight[i]) * 100).toFixed(1)),
+          safetyFactor: Number(((workValue.workWeight / spec.weight[i]) * 100 * 100 / 85).toFixed(1)),
         };
         params.totalDist = params.d1 + params.d2;
         const BWDistance = workValue.workDistance + workValue.blockDistance;
@@ -62,6 +62,7 @@ const findMainFixSpecTable = (spec, workValue, heightOfHookCrane, craneDistance)
         let blockAngle = 0;
         if(workValue.blockHeight) blockAngle = Number((Math.atan((workValue.blockHeight - heightOfHookCrane.craneHeight) / (spec.distance[i] - BWDistance)) * ( 180 / Math.PI )).toFixed(1));
         
+        // totalDistance가 계산으로 생성되었기 때문에 i-1과 i사이의 값이 될 수 있으므로 찾아야한다.
         if(params.totalDist > spec.distance[i-1] && params.totalDist <= spec.distance[i]){
           // -------------------------------- 장애물 추가 시 리깅 조건 계산
           // 1. 작업높이가 장애물높이보다 작을 때

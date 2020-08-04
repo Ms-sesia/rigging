@@ -48,7 +48,7 @@ const findLuffingSpecTable = (spec, workValue, heightOfHookCrane, craneDistance)
       params.luffingAngle = Number((Math.acos(params.d2/spec.fixLuffing)*(180/Math.PI)).toFixed(1));  // 지면과 수평으로부터 올라오는 러핑 각도
       params.h1 = MBoom * Math.sin(spec.mainAngle * Math.PI/180);
       params.h2 = spec.fixLuffing * Math.sin(params.luffingAngle * Math.PI/180);
-      params.safetyFactor = Number((workValue.workWeight/spec.weight[i]*100).toFixed(1));
+      params.safetyFactor = Number((workValue.workWeight / spec.weight[i] * 100 * 100 / 85).toFixed(1));
       const BWDistance = workValue.workDistance + workValue.blockDistance;
       // 장애물이 있을 때 크레인으로부터의 각도
       let blockAngle = 0;
