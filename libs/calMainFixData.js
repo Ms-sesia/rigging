@@ -2,6 +2,7 @@ const riggingData = (spec, index, workValue, heightOfHookCrane, craneDistance, p
   const marginHeight = Number(
     (params.h1 + params.h2 + heightOfHookCrane.craneHeight - (workValue.workHeight + heightOfHookCrane.hookHeight)).toFixed(1)
   );
+  const BWDistance = workValue.workDistance + workValue.blockDistance;
 
   if (marginHeight > 0)
     return {
@@ -21,7 +22,9 @@ const riggingData = (spec, index, workValue, heightOfHookCrane, craneDistance, p
       distance1: Number((params.d1).toFixed(1)),
       distance2: Number((params.d2).toFixed(1)),
       centerToBuildingDistance: Number((spec.distance[index] - workValue.workDistance).toFixed(1)),
+      centerToBlockDistance : Number((spec.distance[index] - BWDistance).toFixed(1)),
       rearToBuildingDistance: Number((spec.distance[index] - craneDistance - workValue.workDistance).toFixed(1)),
+      rearToBlockDistance : Number((spec.distance[index] - craneDistance - BWDistance).toFixed(1)),
       totalDistance: Number((params.d1 + params.d2).toFixed(1)),
       tableDistance: spec.distance[index],
       workDistance: workValue.workDistance,
@@ -54,7 +57,7 @@ const findMainFixSpecTable = (spec, workValue, heightOfHookCrane, craneDistance)
           d2: spec.fixLuffing * Math.cos(((mainAngle - spec.fixAngle) * Math.PI) / 180),
           h1: MBoom * Math.sin((mainAngle * Math.PI) / 180),
           h2: spec.fixLuffing * Math.sin(((mainAngle - spec.fixAngle) * Math.PI) / 180),
-          safetyFactor: Number(((workValue.workWeight / spec.weight[i]) * 100 * 100 / 85).toFixed(1)),
+          safetyFactor: Number(((workValue.workWeight / spec.weight[i]) * 85).toFixed(1)),
         };
         params.totalDist = params.d1 + params.d2;
         if(workValue.blockHeight === undefined)

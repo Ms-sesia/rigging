@@ -1,5 +1,6 @@
 const riggingData = (spec, index, workValue, heightOfHookCrane, craneDistance, params) => {
   const marginHeight =  Number((params.h1 + params.h2 + heightOfHookCrane.craneHeight - (workValue.workHeight + heightOfHookCrane.hookHeight)).toFixed(1));
+  const BWDistance = workValue.workDistance + workValue.blockDistance;
 
   if(marginHeight > 0)  return {  // 출력용 객체, 거리가 먼 것(가벼운 중량을 들 수 있는 것)을 기준으로 출력
     mainBoom : spec.mainBoom,
@@ -18,7 +19,9 @@ const riggingData = (spec, index, workValue, heightOfHookCrane, craneDistance, p
     distance1 : Number(params.d1.toFixed(1)),
     distance2 : Number(params.d2.toFixed(1)),
     centerToBuildingDistance : Number((spec.distance[index] - workValue.workDistance).toFixed(1)),
+    centerToBlockDistance : Number((spec.distance[index] - BWDistance).toFixed(1)),
     rearToBuildingDistance : Number((spec.distance[index] - craneDistance - workValue.workDistance).toFixed(1)),
+    rearToBlockDistance : Number((spec.distance[index] - craneDistance - BWDistance).toFixed(1)),
     totalDistance : Number((params.d1 + params.d2).toFixed(1)),
     tableDistance : spec.distance[index],
     workDistance : workValue.workDistance,
@@ -48,9 +51,11 @@ const findLuffingSpecTable = (spec, workValue, heightOfHookCrane, craneDistance)
       params.luffingAngle = Number((Math.acos(params.d2/spec.fixLuffing)*(180/Math.PI)).toFixed(1));  // 지면과 수평으로부터 올라오는 러핑 각도
       params.h1 = MBoom * Math.sin(spec.mainAngle * Math.PI/180);
       params.h2 = spec.fixLuffing * Math.sin(params.luffingAngle * Math.PI/180);
-      params.safetyFactor = Number((workValue.workWeight / spec.weight[i] * 100 * 100 / 85).toFixed(1));
-      if(blockDistance === undefined)
-        const blockDistance = 0;
+      params.safetyFactor = Number((workValue.workWeight / spec.weight[i] * 85).toFixed(1));
+      if(workValue.blockHeight === undefined)
+        workValue.blockHeight = 0;
+      if(workValue.blockDistance === undefined)
+        workValue.blockDistance = 0;
       const BWDistance = workValue.workDistance + workValue.blockDistance;
       // 장애물이 있을 때 크레인으로부터의 각도
       let blockAngle = 0;
