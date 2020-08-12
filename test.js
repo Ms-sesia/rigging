@@ -13,10 +13,10 @@ const startTime = new Date().getTime();
 // };
 const workValue = { // input value
   blockHeight: 0,
-  blockDistance: 9,
-  workWeight : 10,
-  workDistance : 14,
-  workHeight : 20,
+  blockDistance: 64.3,
+  workWeight : 7.5,
+  workDistance : 1,
+  workHeight : 68,
 };
 
 const riggingData = startApp(workValue);

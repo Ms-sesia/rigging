@@ -51,6 +51,7 @@ const findMainFixSpecTable = (spec, workValue, heightOfHookCrane, craneDistance)
       for (let mainAngle = 85; mainAngle >= 60; mainAngle--) {
         // 삼각함수 : Math.cos(x*Math.PI/180) 각도는 라디안 표기
         const MBoom = spec.mainBoom + spec.totalExtLength; // mainBoom + totalExtLength
+        const BWDistance = workValue.workDistance + workValue.blockDistance;
         const params = {
           mainAngle: mainAngle,
           d1: MBoom * Math.cos((mainAngle * Math.PI) / 180),
@@ -60,14 +61,19 @@ const findMainFixSpecTable = (spec, workValue, heightOfHookCrane, craneDistance)
           safetyFactor: Number(((workValue.workWeight / spec.weight[i]) * 85).toFixed(1)),
         };
         params.totalDist = params.d1 + params.d2;
+
+        // 크레인 길이가 크레인 센터에서 장애물까지의 길이보다 길면 계산 x
+        if (spec.distance[i] - BWDistance - craneDistance < 0)
+          continue;
+
         if(workValue.blockHeight === undefined)
           workValue.blockHeight = 0;
         if(workValue.blockDistance === undefined)
           workValue.blockDistance = 0;
-        const BWDistance = workValue.workDistance + workValue.blockDistance;
         // 장애물이 있을 때 크레인으로부터의 각도
         let blockAngle = 0;
-        if(workValue.blockHeight) blockAngle = Number((Math.atan((workValue.blockHeight - heightOfHookCrane.craneHeight) / (spec.distance[i] - BWDistance)) * ( 180 / Math.PI )).toFixed(1));
+        if(workValue.blockHeight)
+         blockAngle = Number((Math.atan((workValue.blockHeight - heightOfHookCrane.craneHeight) / (spec.distance[i] - BWDistance)) * ( 180 / Math.PI )).toFixed(1));
         
         // totalDistance가 계산으로 생성되었기 때문에 i-1과 i사이의 값이 될 수 있으므로 찾아야한다.
         if(params.totalDist > spec.distance[i-1] && params.totalDist <= spec.distance[i]){
