@@ -13,7 +13,8 @@ const startTime = new Date().getTime();
 // };
 const workValue = { // input value
   blockHeight: 0,
-  blockDistance: 64.3,
+  blockDistance1: 64.3,
+  blockDistance2: 0,
   workWeight : 7.5,
   workDistance : 1,
   workHeight : 68,
