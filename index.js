@@ -7,7 +7,7 @@ const getRiggingData = (workValue) => {
   // 초과치 입력시 처리. 한계조건 : 무게 1200, 작업높이 136, 작업거리 136
   let craneInfo = new Array; // 전체 크레인에 대한 리깅가능한 데이터를 모아둔 배열.
 
-  if(workValue.workWeight > 1200 || workValue.workHeight > 170 || workValue.workDistance > 129 ||workValue.workWeight < 1 || workValue.workHeight < 1 || workValue.workDistance < 1){
+  if(workValue.workWeight > 1200 || workValue.workBuilding.height > 170 || workValue.workBuilding.horizontal > 129 ||workValue.workWeight < 1 || workValue.workBuilding.height < 1 || workValue.workBuilding.horizontal < 1){
     console.log("입력한 조건값이 올바르지 않습니다.");
     return craneInfo;
   }
@@ -16,6 +16,7 @@ const getRiggingData = (workValue) => {
     const craneName = excelInfo.fileName; // 500t, 750t, 1200t 구분
     const craneDistance = getCraneDistance(craneName);
     if(craneName === 'L_1500_50m' || craneName === 'L_1500_84m'){ // if 모델 조건 시작 괄호
+      console.log(craneDistance);
     excelInfo.sheetname.map( (sheetName, index) => { // 엑셀 파일의 sheet
       const raw = excelInfo.length[index].raw;  // sheet의 raw 길이
       const colum = excelInfo.length[index].colum;  // sheet의 colum 길이
