@@ -23,7 +23,7 @@ const getcraneData = (data, row, colum, modeName, workValue, craneDistance) => {
     tableSpec.extBoom4 = data[charIndex + 7].v;
     tableSpec.adapter2 = data[charIndex + 8].v;
     tableSpec.fixLuffing = data[charIndex + 9].v;
-    tableSpec.addWeight = data[charIndex + 11].v;
+    tableSpec.counterWeight = data[charIndex + 11].v;
     tableSpec.distance = excelData(data, 'A', row);
     tableSpec.weight = excelData(data, charIndex, row, i);
     tableSpec.overRear = data[charIndex + 12].v;

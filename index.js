@@ -14,9 +14,11 @@ const getRiggingData = (workValue) => {
   getTableInfo.forEach( (excelInfo) => {  // 엑셀파일 전부
     let preCraneCode = '';
     const craneName = excelInfo.fileName; // 500t, 750t, 1200t 구분
-    const craneDistance = getCraneDistance(craneName);
+    let craneDistance = getCraneDistance(craneName, workValue.craneLocation);
+    if(workValue.craneLocation === 'back') craneDistance = craneDistance.rearDistance;
+    if(workValue.craneLocation === 'front') craneDistance = craneDistance.frontDistance;
+    if(workValue.craneLocation === 'side') craneDistance = craneDistance.trigger;
     if(craneName === 'L_1500_50m' || craneName === 'L_1500_84m'){ // if 모델 조건 시작 괄호
-      console.log(craneDistance);
     excelInfo.sheetname.map( (sheetName, index) => { // 엑셀 파일의 sheet
       const raw = excelInfo.length[index].raw;  // sheet의 raw 길이
       const colum = excelInfo.length[index].colum;  // sheet의 colum 길이
