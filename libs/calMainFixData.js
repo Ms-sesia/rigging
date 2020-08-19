@@ -17,7 +17,7 @@ const riggingData = (spec, index, workValue, heightOfHookCrane, craneDistance, p
       extBoom4: spec.extBoom4,
       adapter2: Number(spec.adapter2.toFixed(1)), // 값이 소숫점 9번째 자리까지 나와서 fixed이용.
       fixLuffing: spec.fixLuffing,
-      fixLuffingAngle: spec.fixAngle,
+      fixLuffingAngle: spec.fixAngle, // mainAngle에서 내려오는 fix각도.
       craneRearDistance: craneDistance,
       distance1: Number((params.d1).toFixed(1)),
       distance2: Number((params.d2).toFixed(1)),
@@ -164,6 +164,3 @@ const findMainFixSpecTable = (spec, workValue, heightOfHookCrane, craneDistance)
         // }
 
 export default findMainFixSpecTable;
-
-
-

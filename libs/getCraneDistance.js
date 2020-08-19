@@ -1,25 +1,46 @@
 const getCraneDistance = (craneName) => {
+  let crane = { trigger, rearDistance};
   switch (craneName) {
-    case "LTM_1100":
-      return 3.972;
-    case "LTM_1130":
-      return 4.88;
-    case "LTM_1160":
-      return 4.9;
-    case "LTM_1200":
-      return 4.850;
-    case "LTM_1300_N":
-      return 4.530;
-    case "LTM_1300_O":
-      return 5.530;
-    case "LTM_1500_50m":
-      return 6.025;
-    case "LTM_1500_84m":
-      return 6.025;
-    case "LTM_1750":
-      return 8.33;
-    case "LTM_11200":
-      return 8.93;  // 아직 해결안됨.
+    case "L_1100":
+      crane.rearDistance = 3.972;
+      crane.trigger = 7.275;
+      return crane;
+    case "L_1130":
+      crane.rearDistance = 4.88;
+      crane.trigger = 8.05;
+      return crane;
+    case "L_1160":
+      crane.rearDistance = 4.9;
+      crane.trigger = 8.914;
+      return crane;
+    case "L_1200":
+      crane.rearDistance = 4.850;
+      crane.trigger = 8.9;
+      return crane;
+    case "L_1300_N":
+      crane.rearDistance = 4.530;
+      crane.trigger = 9.132;
+      return crane;
+    case "L_1300_O":
+      crane.rearDistance = 5.530;
+      crane.trigger = 9.1;
+      return crane;
+    case "L_1500_50m":
+      crane.rearDistance = 6.025;
+      crane.trigger = 10.300;
+      return crane;
+    case "L_1500_84m":
+      crane.rearDistance = 6.025;
+      crane.trigger = 10.300;
+      return crane;
+    case "L_1750":
+      crane.rearDistance = 8.33;
+      crane.trigger = 12.619;
+      return crane;
+    case "L_11200":
+      crane.rearDistance = 8.93;
+      crane.trigger = 13.016;
+      return crane;
   }
 };
 

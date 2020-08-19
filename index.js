@@ -15,7 +15,7 @@ const getRiggingData = (workValue) => {
     let preCraneCode = '';
     const craneName = excelInfo.fileName; // 500t, 750t, 1200t 구분
     const craneDistance = getCraneDistance(craneName);
-    if(craneName === 'LTM_1500_50m' || craneName === 'LTM_1500_84m'){ // if 모델 조건 시작 괄호
+    if(craneName === 'L_1500_50m' || craneName === 'L_1500_84m'){ // if 모델 조건 시작 괄호
     excelInfo.sheetname.map( (sheetName, index) => { // 엑셀 파일의 sheet
       const raw = excelInfo.length[index].raw;  // sheet의 raw 길이
       const colum = excelInfo.length[index].colum;  // sheet의 colum 길이
