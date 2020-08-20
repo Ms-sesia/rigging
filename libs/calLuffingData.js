@@ -15,7 +15,7 @@ const riggingData = (spec, index, workValue, heightOfHookCrane, craneDistance, p
       adapter2 : Number(spec.adapter2.toFixed(1)),  // 값이 소숫점 9번째 자리까지 나와서 fixed이용.
       fixLuffing : spec.fixLuffing,
       fixLuffingAngle : Number(spec.mainAngle - params.luffingAngle.toFixed(1)),  // mainAngle에서 내려오는 luffing각도.
-      // fixLuffingAngle : Number(params.luffingAngle.toFixed(1)),
+      
       distance1 : Number(params.d1.toFixed(1)),
       distance2 : Number(params.d2.toFixed(1)),
       craneDistance : craneDistance,
@@ -29,6 +29,7 @@ const riggingData = (spec, index, workValue, heightOfHookCrane, craneDistance, p
       height2 : Number(params.h2.toFixed(1)),
       totalHeight : Number((params.h1 + params.h2 + heightOfHookCrane.craneHeight).toFixed(1)),
       marginHeight : marginHeight,
+      craneLocation : workValue.craneLocation,
       workBuilding : {
         horizontal: workValue.workBuilding.horizontal,
         vertical: workValue.workBuilding.vertical,
