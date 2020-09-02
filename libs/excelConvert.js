@@ -3,9 +3,9 @@ import fs from "fs";
 import path from "path";
 
 const cwd =  path.join(__dirname,'../','./excelData');
-export const filelist = fs.readdirSync(cwd);
+const filelist = fs.readdirSync(cwd);
 
-export const getTableInfo = filelist.map( (filename) => {
+const getTableInfo = filelist.map( (filename) => {
   const workbook = XLSX.readFile(`${cwd}/${filename}`);
   let excelLength = [];
   workbook.SheetNames.forEach( (sheetname, index) => {
@@ -24,3 +24,5 @@ export const getTableInfo = filelist.map( (filename) => {
     length : excelLength,
   };
 });
+
+export default getTableInfo;

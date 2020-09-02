@@ -38,6 +38,7 @@ const riggingData = (spec, index, workValue, heightOfHookCrane, craneDistance, p
         vertical: workValue.workBuilding.vertical,
         height: workValue.workBuilding.height,
       },
+      workingArea : spec.workingArea,
       tableWeight: spec.weight[index],
       counterWeight: spec.counterWeight,
       overRear: spec.overRear,

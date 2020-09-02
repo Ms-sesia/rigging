@@ -22,15 +22,16 @@ const getcraneData = (data, row, colum, modeName, workValue, craneDistance) => {
     tableSpec.extBoom3 = data[charIndex + 6].v;
     tableSpec.extBoom4 = data[charIndex + 7].v;
     tableSpec.adapter2 = data[charIndex + 8].v;
-    tableSpec.fixLuffing = data[charIndex + 9].v;
-    tableSpec.counterWeight = data[charIndex + 11].v;
+    tableSpec.flyFixLuffing = data[charIndex + 9].v;
+    tableSpec.workingArea = data[charIndex + 11].v; // 회전반경
+    tableSpec.counterWeight = data[charIndex + 12].v;
+    tableSpec.overRear = data[charIndex + 13].v;
+    tableSpec.optional = data[charIndex + 14].v;  // 앞단에서 telescopableLoads 와 optional 구분
     tableSpec.distance = excelData(data, 'A', row);
     tableSpec.weight = excelData(data, charIndex, row, i);
-    tableSpec.overRear = data[charIndex + 12].v;
-    tableSpec.optional = data[charIndex + 13].v;
     
-    if(modeName === 'MAIN' || modeName === 'FIX' || modeName === 'JIBBOOM'){  // main & fix mode
-      tableSpec.fixAngle = data[charIndex + 10].v;  
+    if(modeName === 'MAIN' || modeName === 'FIX' || modeName === 'FLYJIB'){  // main & fix mode
+      tableSpec.flyFixAngle = data[charIndex + 10].v;
       const Fix = findMainFixSpecTable(tableSpec, workValue, heightOfHookCrane, craneDistance);
       if(Fix) return Fix;
     } else {  // luffing mode

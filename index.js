@@ -1,4 +1,4 @@
-import { getTableInfo } from "./libs/excelConvert";
+import getTableInfo from "./libs/excelConvert";
 import getCraneData from "./libs/getCraneData";
 import modeSelect from "./libs/modeSelect";
 import getCraneDistance from "./libs/getCraneDistance";
@@ -13,12 +13,13 @@ const getRiggingData = (workValue) => {
   }
   getTableInfo.forEach( (excelInfo) => {  // 엑셀파일 전부
     let preCraneCode = '';
+    let craneDistance = 0;
     const craneName = excelInfo.fileName; // 500t, 750t, 1200t 구분
-    let craneDistance = getCraneDistance(craneName, workValue.craneLocation);
-    if(workValue.craneLocation === 'back') craneDistance = craneDistance.rearDistance;
-    if(workValue.craneLocation === 'front') craneDistance = craneDistance.frontDistance;
-    if(workValue.craneLocation === 'side') craneDistance = craneDistance.trigger;
-    if(craneName === 'L_1500_50m' || craneName === 'L_1500_84m'){ // if 모델 조건 시작 괄호
+    const selectCraneLocation = getCraneDistance(craneName, workValue.craneLocation);
+    if(workValue.craneLocation === 'back') craneDistance = selectCraneLocation.rearDistance;
+    if(workValue.craneLocation === 'front') craneDistance = selectCraneLocation.frontDistance;
+    if(workValue.craneLocation === 'side') craneDistance = selectCraneLocation.trigger;
+    // if(craneName === 'L_1500_50m' || craneName === 'L_1500_84m'){ // 테스트용 if
     excelInfo.sheetname.map( (sheetName, index) => { // 엑셀 파일의 sheet
       const raw = excelInfo.length[index].raw;  // sheet의 raw 길이
       const colum = excelInfo.length[index].colum;  // sheet의 colum 길이
@@ -38,7 +39,7 @@ const getRiggingData = (workValue) => {
         }
       }
     })
-  }
+  // }
   } // if 모델 조건 끝 괄호
   );
   if(craneInfo.length) {

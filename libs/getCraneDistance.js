@@ -1,6 +1,21 @@
 const getCraneDistance = (craneName, craneLocation) => {
   let crane = {};
   switch (craneName) {
+    case "L_1030":
+      crane.rearDistance = 3.15;
+      crane.frontDistance = 5.535;
+      crane.trigger = 6.5;
+      return crane;
+    case "L_1040":
+      crane.rearDistance = 3.33;
+      crane.frontDistance = 5.535;
+      crane.trigger = 6.5;
+      return crane;
+    case "L_1050":
+      crane.rearDistance = 3.53;
+      crane.frontDistance = 5.963;
+      crane.trigger = 6.9;
+      return crane;
     case "L_1100":
       crane.rearDistance = 3.972;
       crane.frontDistance = 8.02;
