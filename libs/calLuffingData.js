@@ -13,7 +13,7 @@ const riggingData = (spec, index, workValue, heightOfHookCrane, craneDistance, p
       extBoom3 : spec.extBoom3,
       extBoom4 : spec.extBoom4,
       adapter2 : Number(spec.adapter2.toFixed(1)),  // 값이 소숫점 9번째 자리까지 나와서 fixed이용.
-      fixLuffing : spec.fixLuffing,
+      flyFixLuffing : spec.flyFixLuffing,
       fixLuffingAngle : Number(spec.mainAngle - params.luffingAngle.toFixed(1)),  // mainAngle에서 내려오는 luffing각도.
       
       distance1 : Number(params.d1.toFixed(1)),
@@ -62,9 +62,9 @@ const findLuffingSpecTable = (spec, workValue, heightOfHookCrane, craneDistance)
       // if (spec.distance[i] - B1B2WDistance - craneDistance < 0)
       //   continue;
       params.d2 = spec.distance[i] - params.d1;
-      params.luffingAngle = Number((Math.acos(params.d2/spec.fixLuffing)*(180/Math.PI)).toFixed(1));  // 지면과 수평으로부터 올라오는 러핑 각도
+      params.luffingAngle = Number((Math.acos(params.d2/spec.flyFixLuffing)*(180/Math.PI)).toFixed(1));  // 지면과 수평으로부터 올라오는 러핑 각도
       params.h1 = MBoom * Math.sin(spec.mainAngle * Math.PI/180);
-      params.h2 = spec.fixLuffing * Math.sin(params.luffingAngle * Math.PI/180);
+      params.h2 = spec.flyFixLuffing * Math.sin(params.luffingAngle * Math.PI/180);
       params.safetyFactor = Number((workValue.workWeight / spec.weight[i] * 85).toFixed(1));
       if(workValue.block.blockHeight1 === undefined)
         workValue.block.blockHeight1 = 0;
@@ -85,6 +85,7 @@ const findLuffingSpecTable = (spec, workValue, heightOfHookCrane, craneDistance)
           // 1] h1+크레인높이 > 장애물 높이
           if(params.h1 + heightOfHookCrane.craneHeight > workValue.block.blockHeight1){
             const testCode = 1;
+            // console.log(testCode);
             return riggingData(spec, i, workValue, heightOfHookCrane, craneDistance, params, testCode);
           }
         // 2) 장애물 1 2 거리 + 작업거리가 d2보다 작을 때 && mainAngle이 blockAngle보다 클 때
@@ -92,6 +93,7 @@ const findLuffingSpecTable = (spec, workValue, heightOfHookCrane, craneDistance)
           // 1] h1+크레인높이 > 장애물 높이
           if(params.h1 + heightOfHookCrane.craneHeight > workValue.block.blockHeight1){
             const testCode = 2;
+            // console.log(testCode);
             return riggingData(spec, i, workValue, heightOfHookCrane, craneDistance, params, testCode);
           }
           // 2] h1+크레인높이 < 장애물 높이
@@ -99,6 +101,7 @@ const findLuffingSpecTable = (spec, workValue, heightOfHookCrane, craneDistance)
             const luffingAngle2 = Number((Math.atan((workValue.block.blockHeight1 - params.h1 - heightOfHookCrane.craneHeight) / (params.d2 - BWDistance)) * (180 / Math.PI)).toFixed(1)); // 픽스(러핑) 시작지점에서 건물까지의 대각선 각도
             if(luffingAngle2 < params.luffingAngle){
               const testCode = 3;
+              // console.log(testCode);
               return riggingData(spec, i, workValue, heightOfHookCrane, craneDistance, params, testCode);
             }
           }
@@ -111,6 +114,7 @@ const findLuffingSpecTable = (spec, workValue, heightOfHookCrane, craneDistance)
           // 1] h1 + 크레인높이 > 작업높이
           if(params.h1 + heightOfHookCrane.craneHeight > workValue.workBuilding.height){
             const testCode = 4;
+            // console.log(testCode);
             return riggingData(spec, i, workValue, heightOfHookCrane, craneDistance, params, testCode);
           }
           // 2] h1 + 크레인높이 < 작업높이
@@ -118,14 +122,17 @@ const findLuffingSpecTable = (spec, workValue, heightOfHookCrane, craneDistance)
             const luffingAngle2 = Number((Math.atan((workValue.workBuilding.height - params.h1 - heightOfHookCrane.craneHeight) / (params.d2 - workValue.workBuilding.horizontal)) * (180 / Math.PI)).toFixed(1)); // 픽스(러핑) 시작지점에서 건물까지의 대각선 각도
             if( luffingAngle2 < params.luffingAngle){
               const testCode = 5;
+              // console.log(testCode);
               return riggingData(spec, i, workValue, heightOfHookCrane, craneDistance, params, testCode);
             }
           }
         // 2) 장애물거리 + 작업거리가 d2보다 작을 때 && mainAngle이 blockAngle보다 클 때
         } else if(params.d2 > B1B2WDistance && blockAngle < spec.mainAngle && minMainAngle < spec.mainAngle) {
           // 1] h1 + 크레인높이 > 작업높이
+          
           if(params.h1 + heightOfHookCrane.craneHeight > workValue.workBuilding.height){
             const testCode = 6; 
+            // console.log(testCode);
             return riggingData(spec, i, workValue, heightOfHookCrane, craneDistance, params, testCode);
           }
           // 2] h1 + 크레인높이 < 작업높이
@@ -133,6 +140,7 @@ const findLuffingSpecTable = (spec, workValue, heightOfHookCrane, craneDistance)
             const luffingAngle2 = Number((Math.atan((workValue.workBuilding.height - params.h1 - heightOfHookCrane.craneHeight) / (params.d2 - workValue.workBuilding.horizontal)) * (180 / Math.PI)).toFixed(1)); // 픽스(러핑) 시작지점에서 건물까지의 대각선 각도
             if(luffingAngle2 < params.luffingAngle){
               const testCode = 7;
+              // console.log(testCode);
               return riggingData(spec, i, workValue, heightOfHookCrane, craneDistance, params, testCode);
             }
           }

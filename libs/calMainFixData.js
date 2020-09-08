@@ -16,7 +16,7 @@ const riggingData = (spec, index, workValue, heightOfHookCrane, craneDistance, p
       extBoom3: spec.extBoom3,
       extBoom4: spec.extBoom4,
       adapter2: Number(spec.adapter2.toFixed(1)), // 값이 소숫점 9번째 자리까지 나와서 fixed이용.
-      fixLuffing: spec.fixLuffing,
+      fixLuffing: spec.flyFixLuffing,
       fixLuffingAngle: spec.fixAngle, // mainAngle에서 내려오는 fix각도.
 
       distance1: Number((params.d1).toFixed(1)),
@@ -63,9 +63,9 @@ const findMainFixSpecTable = (spec, workValue, heightOfHookCrane, craneDistance)
         const params = {
           mainAngle: mainAngle,
           d1: MBoom * Math.cos((mainAngle * Math.PI) / 180),
-          d2: spec.fixLuffing * Math.cos(((mainAngle - spec.fixAngle) * Math.PI) / 180),
+          d2: spec.flyFixLuffing * Math.cos(((mainAngle - spec.fixAngle) * Math.PI) / 180),
           h1: MBoom * Math.sin((mainAngle * Math.PI) / 180),
-          h2: spec.fixLuffing * Math.sin(((mainAngle - spec.fixAngle) * Math.PI) / 180),
+          h2: spec.flyFixLuffing * Math.sin(((mainAngle - spec.fixAngle) * Math.PI) / 180),
           safetyFactor: Number(((workValue.workWeight / spec.weight[i]) * 85).toFixed(1)),
         };
         params.totalDist = params.d1 + params.d2;

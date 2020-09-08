@@ -8,9 +8,8 @@ const heightOfHookCrane = { // Default Hook and Crain height. heightOfHookCrain
   hookHeight : 6,
 };
 
-const getcraneData = (data, row, colum, modeName, workValue, craneDistance) => {
+const getcraneData = (data, row, colum, modeName, workValue, craneDistance, craneCode) => {
   let tableSpec = {};
-
   for(let i = 1 ; i < colum ; i++ ){ // B열부터 끝열까지
     let charIndex = numberToAlph(i);  // B, C, D, E, F, ...
     if(i>25) charIndex = numberToAlph(0) + numberToAlph(i - 26);  // Z이후 엑셀은 AA AB AC AD ...

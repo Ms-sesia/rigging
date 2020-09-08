@@ -16,7 +16,7 @@ const workValue = { // input value
 };
 
 const riggingData = startApp(workValue);
-// console.log(riggingData);
+console.log(riggingData);
 
 // const endTime = new Date().getTime(); 
 // console.log(endTime - startTime);
