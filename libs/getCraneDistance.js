@@ -1,4 +1,4 @@
-const getCraneDistance = (craneName, craneLocation) => {
+const getCraneDistance = (craneName) => {
   let crane = {};
   switch (craneName) {
     case "L_1030":

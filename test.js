@@ -1,5 +1,6 @@
 import startApp from "./index";
 const workValue = { // input value  
+  safetyFactor : 80,
   craneLocation : 'back',  // front, back, side
   workWeight : 7.5,
   workBuilding : {  // 크레인이 건물에 붙는 면을 가로.
@@ -8,10 +9,11 @@ const workValue = { // input value
     height : 68,
   },
   block : {
-    blockDistance1: 64.3,
-    blockDistance2: 0,
-    blockHeight1: 0,
-    blockHeight2: 0
+    vertical1: 64.3,
+    horizontal1: 0,
+    height1: 0,
+    vertical2: 0,
+    height2: 0
   },
 };
 
