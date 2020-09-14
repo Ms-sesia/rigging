@@ -19,7 +19,7 @@ const getTableInfo = filelist.map((filename) => {
   });
 
   return {
-    fileName: filename.split("-")[0],
+    fileName: filename.split(".xlsx")[0],
     sheetname: workbook.SheetNames, // 엑셀파일에서 가져온 시트명.
     data: workbook.Sheets, // 시트의 데이터들. workbook.Sheets[시트명] > 시트명에 해당하는 데이터들
     length: excelLength,

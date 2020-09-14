@@ -1,12 +1,9 @@
 const riggingData = (spec, index, workValue, heightOfHookCrane, craneDistance, params, testCode) => {
-  const marginHeight = Number(
-    (params.h1 + params.h2 + heightOfHookCrane.craneHeight - (workValue.workBuilding.height + heightOfHookCrane.hookHeight)).toFixed(1)
-  );
+  const marginHeight = Number((params.h1 + params.h2 + heightOfHookCrane.craneHeight - (workValue.workBuilding.height + heightOfHookCrane.hookHeight)).toFixed(1));
   const B1B2WDistance = workValue.workBuilding.horizontal + workValue.block.vertical1 + workValue.block.vertical2;
 
   if (marginHeight > 0)
-    return {
-      // 출력용 객체, 거리가 먼 것(가벼운 중량을 들 수 있는 것)을 기준으로 출력
+    return {// 출력용 객체, 거리가 먼 것(가벼운 중량을 들 수 있는 것)을 기준으로 출력
       mainBoom: spec.mainBoom,
       mainAngle: params.mainAngle,
       totalExtLength: spec.totalExtLength,
@@ -18,7 +15,6 @@ const riggingData = (spec, index, workValue, heightOfHookCrane, craneDistance, p
       adapter2: Number(spec.adapter2.toFixed(1)), // 값이 소숫점 9번째 자리까지 나와서 fixed이용.
       fixLuffing: spec.flyFixLuffing,
       fixLuffingAngle: spec.fixAngle, // mainAngle에서 내려오는 fix각도.
-
       distance1: Number((params.d1).toFixed(1)),
       distance2: Number((params.d2).toFixed(1)),
       craneDistance : craneDistance,
@@ -32,19 +28,19 @@ const riggingData = (spec, index, workValue, heightOfHookCrane, craneDistance, p
       height2: Number((params.h2).toFixed(1)),
       totalHeight: Number((params.h1 + params.h2 + heightOfHookCrane.craneHeight).toFixed(1)),
       marginHeight: marginHeight,
-      craneLocation : workValue.craneLocation,
-      workBuilding : {
-        horizontal: workValue.workBuilding.horizontal,
-        vertical: workValue.workBuilding.vertical,
-        height: workValue.workBuilding.height,
-      },
       workingArea : spec.workingArea,
       tableWeight: spec.weight[index],
       counterWeight: spec.counterWeight,
       overRear: spec.overRear,
       optional: spec.optional,
-      workWeight: workValue.workWeight,
       safetyFactor: params.safetyFactor,  // 안전율
+      craneLocation : workValue.craneLocation,
+      workWeight: workValue.workWeight,
+      workBuilding : {
+        horizontal: workValue.workBuilding.horizontal,
+        vertical: workValue.workBuilding.vertical,
+        height: workValue.workBuilding.height,
+      },
       testCode : testCode,
     };
 };
@@ -82,7 +78,7 @@ const findMainFixSpecTable = (spec, workValue, heightOfHookCrane, craneDistance)
           // 장애물이 있을 때 크레인으로부터의 각도
           let blockAngle = 0;
           if(workValue.block.height1)
-          blockAngle = Number((Math.atan((workValue.block.height1 - heightOfHookCrane.craneHeight) / (spec.distance[i] - BWDistance)) * ( 180 / Math.PI )).toFixed(1));
+            blockAngle = Number((Math.atan((workValue.block.height1 - heightOfHookCrane.craneHeight) / (spec.distance[i] - BWDistance)) * ( 180 / Math.PI )).toFixed(1));
           
           // totalDistance가 계산으로 생성되었기 때문에 i-1과 i사이의 값이 될 수 있으므로 찾아야한다.
           if(params.totalDist > spec.distance[i-1] && params.totalDist <= spec.distance[i]){

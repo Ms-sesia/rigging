@@ -15,7 +15,7 @@ const getRiggingData = (workValue) => {
     let preCraneCode = '';
     let craneDistance = 0;
     const craneName = excelInfo.fileName; // 500t, 750t, 1200t 구분
-    const selectCraneLocation = getCraneDistance(craneName, workValue.craneLocation);
+    const selectCraneLocation = getCraneDistance(craneName);
     if(workValue.craneLocation === 'back') craneDistance = selectCraneLocation.rearDistance;
     if(workValue.craneLocation === 'front') craneDistance = selectCraneLocation.frontDistance;
     if(workValue.craneLocation === 'side') craneDistance = selectCraneLocation.trigger;
@@ -26,7 +26,7 @@ const getRiggingData = (workValue) => {
       const colum = excelInfo.length[index].colum;  // sheet의 colum 길이
       const craneCode = sheetName.split('_')[0];  // TN, TY3, TNZF, TYVENZF 등 모드별 이름
       const modeName = modeSelect(sheetName); // main, fix, luffing 구분
-      const craneData = getCraneData(excelInfo.data[sheetName], raw, colum, modeName, workValue, craneDistance, craneCode); // 작업값을 만족하는 craneData 계산
+      const craneData = getCraneData(excelInfo.data[sheetName], raw, colum, modeName, workValue, craneDistance); // 작업값을 만족하는 craneData 계산
       if(craneData){  // 작업값들을 만족하는 제원표의 계산데이터
         if(preCraneCode !== craneCode){
           craneInfo.push({

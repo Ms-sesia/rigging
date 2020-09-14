@@ -8,7 +8,7 @@ const heightOfHookCrane = { // Default Hook and Crain height. heightOfHookCrain
   hookHeight : 6,
 };
 
-const getcraneData = (data, row, colum, modeName, workValue, craneDistance, craneCode) => {
+const getcraneData = (data, row, colum, modeName, workValue, craneDistance) => {
   let tableSpec = {};
   for(let i = 1 ; i < colum ; i++ ){ // B열부터 끝열까지
     let charIndex = numberToAlph(i);  // B, C, D, E, F, ...
@@ -27,7 +27,7 @@ const getcraneData = (data, row, colum, modeName, workValue, craneDistance, cran
     tableSpec.overRear = data[charIndex + 13].v;
     tableSpec.optional = data[charIndex + 14].v;  // 앞단에서 telescopableLoads 와 optional 구분
     tableSpec.distance = excelData(data, 'A', row);
-    tableSpec.weight = excelData(data, charIndex, row, i);
+    tableSpec.weight = excelData(data, charIndex, row);
     
     if(modeName === 'MAIN' || modeName === 'FIX' || modeName === 'FLYJIB'){  // main & fix mode
       tableSpec.flyFixAngle = data[charIndex + 10].v;
