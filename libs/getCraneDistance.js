@@ -61,7 +61,7 @@ const getCraneDistance = (craneName) => {
       crane.frontDistance = 8.45;
       crane.trigger = 8.05;
       return crane;
-    case "L_1160_5.1":
+    case "L_1150_6.1":
       crane.rearDistance = 4.9;
       crane.frontDistance = 9.02;
       crane.trigger = 8.914;

@@ -12,7 +12,8 @@ const getcraneData = (data, row, colum, modeName, workValue, craneDistance) => {
   let tableSpec = {};
   for(let i = 1 ; i < colum ; i++ ){ // B열부터 끝열까지
     let charIndex = numberToAlph(i);  // B, C, D, E, F, ...
-    if(i>25) charIndex = numberToAlph(0) + numberToAlph(i - 26);  // Z이후 엑셀은 AA AB AC AD ...
+    if(i>25 && i<52) charIndex = numberToAlph(0) + numberToAlph(i - 26 * 1);  // Z이후 엑셀은 AA AB AC AD ...
+    if(i>=52) charIndex = numberToAlph(1) + numberToAlph(i - 26 * 2);  // AA이후 엑셀은 BA BB BC BD ...
     tableSpec.mainBoom = data[charIndex + 1].v;  // B1, C1, D1, E1, ...
     tableSpec.totalExtLength = data[charIndex + 2].v;
     tableSpec.adapter1 = data[charIndex + 3].v;
@@ -28,7 +29,7 @@ const getcraneData = (data, row, colum, modeName, workValue, craneDistance) => {
     tableSpec.optional = data[charIndex + 14].v;  // 앞단에서 telescopableLoads 와 optional 구분
     tableSpec.distance = excelData(data, 'A', row);
     tableSpec.weight = excelData(data, charIndex, row);
-    
+
     if(modeName === 'MAIN' || modeName === 'FIX' || modeName === 'FLYJIB'){  // main & fix mode
       tableSpec.flyFixAngle = data[charIndex + 10].v;
       const Fix = findMainFixSpecTable(tableSpec, workValue, heightOfHookCrane, craneDistance);
@@ -37,7 +38,7 @@ const getcraneData = (data, row, colum, modeName, workValue, craneDistance) => {
       tableSpec.mainAngle = data[charIndex + 10].v;
       const Luffing = findLuffingSpecTable(tableSpec, workValue, heightOfHookCrane, craneDistance);
       if(Luffing) return Luffing;
-    } 
+    }
   }
 };
 
