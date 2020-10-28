@@ -22,11 +22,11 @@ const getRiggingData = (workValue) => {
     if(workValue.craneLocation === 'front') craneDistance = selectCraneLocation.frontDistance;
     if(workValue.craneLocation === 'side') craneDistance = selectCraneLocation.trigger;
 
-    if(craneName === 'L_11200_9.1'){ // 테스트용 if 1
+    // if(craneName === 'L_11200_9.1'){ // 테스트용 if 1
     // crane 이름, 코드명 출력을 위한 콘솔
     // console.log(craneName);
     excelInfo.sheetname.map( (sheetName, index) => { // 엑셀 파일의 sheet
-      if(sheetName === 'T7_202t_TAB1780121'){ // 테스트용 if 2 
+      // if(sheetName === 'T7_202t_TAB1780121'){ // 테스트용 if 2 
       const row = excelInfo.length[index].row;  // sheet의 row 길이
       const column = excelInfo.length[index].column;  // sheet의 column 길이
       const craneCode = sheetName.split('_')[0];  // TN, TY3, TNZF, TYVENZF 등 모드별 이름
@@ -50,10 +50,10 @@ const getRiggingData = (workValue) => {
           preCraneCode = craneCode;
         }
       }
-    }// 테스트용 if 2
+    // }// 테스트용 if 2
     });
   }
-  }// 테스트용 if 1
+  // }// 테스트용 if 1
   );
   if(craneInfo.length) {
     craneInfo.sort( (a, b) => a.craneName.split('_')[1] - b.craneName.split('_')[1] );  // 크레인이름 오름차순 정렬
