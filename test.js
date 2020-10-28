@@ -15,7 +15,7 @@ const workValue = { // input value
   //   vertical2: 0,
   //   height2: 0
   // },
-  workWeight : 11,
+  workWeight : 1,
   workBuilding : {  // 크레인이 건물에 붙는 면을 가로.
     vertical : 1,
     horizontal : 0,

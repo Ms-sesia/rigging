@@ -10,11 +10,11 @@ const getTableInfo = filelist.map((filename) => {
   let excelLength = [];
   workbook.SheetNames.forEach((sheetname, index) => {
     const tableRowLength = Object.keys(XLSX.utils.sheet_to_json(workbook.Sheets[sheetname], { header: "A" })).length; // 선택한 시트의 행의 개수
-    const tableColumLength = Object.keys(XLSX.utils.sheet_to_json(workbook.Sheets[sheetname], { header: "A" })[0])
+    const tableColumnLength = Object.keys(XLSX.utils.sheet_to_json(workbook.Sheets[sheetname], { header: "A" })[0])
       .length; //선택한 시트의 열의 개수
     excelLength[index] = {
-      raw: tableRowLength,
-      colum: tableColumLength,
+      row: tableRowLength,
+      column: tableColumnLength,
     };
   });
 
