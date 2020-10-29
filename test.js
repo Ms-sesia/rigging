@@ -1,4 +1,7 @@
-import startApp from "./index";
+import partsArray from "./libs/partsArray";
+import startApp from "./libs/riggingData";
+import craneData from "./libs/craneData";
+
 const workValue = { // input value  
   safetyFactor : 85,
   craneLocation : 'back',  // front, back, side
@@ -30,8 +33,10 @@ const workValue = { // input value
   },
 };
 
-const riggingData = startApp(workValue);
-// console.log(riggingData);
+// startApp(workValue);
+// console.log(startApp(workValue));
 
+// partsArray(craneData);
+console.log(partsArray(craneData));
 // const endTime = new Date().getTime(); 
 // console.log(endTime - startTime);

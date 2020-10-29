@@ -1,0 +1,51 @@
+export default {
+  "craneName": "L_11200_9.1",
+  "craneCode": "T7YVEV3V2F|NZF",
+  "craneModeName": "FIX",
+  "craneData": {
+    "mainBoom": 70.8,
+    "mainAngle": 79,
+    "totalExtLength": 8.7,
+    "adapter1": 2.7,
+    "extBoom1": 6,
+    "extBoom2": 0,
+    "extBoom3": 0,
+    "extBoom4": 0,
+    "adapter2": 0,
+    "flyFixLuffing": 48.5,
+    "flyFixLuffingAngle": 0,
+    "distance1": 8.3,
+    "distance2": 1.2,
+    "craneDistance": 8.93,
+    "centerToBuildingDistance": 9,
+    "centerToBlockDistance": 9,
+    "craneToBuildingDistance": 0.1,
+    "craneToBlockDistance": null,
+    "totalDistance": 9.5,
+    "tableDistance": 10,
+    "height1": 42.6,
+    "height2": 6.4,
+    "totalHeight": 51,
+    "marginHeight": 44,
+    "workingArea": 360,
+    "tableWeight": 157,
+    "counterWeight": "202",
+    "overRear": "x",
+    "optional": "x",
+    "safetyFactor": 6,
+    "craneLocation": "back",
+    "workWeight": 11,
+    "workBuilding": {
+      "horizontal": 0,
+      "vertical": 1,
+      "height": 1
+    },
+    "block": {
+      "vertical1": 0,
+      "horizontal1": 0,
+      "height1": 0,
+      "vertical2": 0,
+      "height2": 0
+    }
+  }
+}

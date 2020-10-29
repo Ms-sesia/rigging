@@ -1,9 +1,10 @@
-import getTableInfo from "./libs/excelConvert";
-import getCraneData from "./libs/getCraneData";
-import modeSelect from "./libs/modeSelect";
-import getCraneDistance from "./libs/getCraneDistance";
+import getCraneData from "./getCraneData";
+import modeSelect from "./modeSelect";
+import getCraneDistance from "./getCraneDistance";
+import getExcelData from "./excelConvert";
 
 const getRiggingData = (workValue) => {
+  const specTableInfo = getExcelData('craneSpecTable');
   // 초과치 입력시 처리. 한계조건 : 무게 1200, 작업높이 136, 작업거리 136
   let craneInfo = new Array; // 전체 크레인에 대한 리깅가능한 데이터를 모아둔 배열.
 
@@ -11,24 +12,33 @@ const getRiggingData = (workValue) => {
     console.log("입력한 조건값이 올바르지 않습니다.");
     return craneInfo;
   }
-  getTableInfo.forEach( (excelInfo) => {  // 엑셀파일 전부
+  specTableInfo.forEach( (excelInfo) => {  // 엑셀파일 전부
     let preCraneCode = '';
-    let printPreCode = '';
+    // let printPreCode = '';
     let craneDistance = 0;
     const craneName = excelInfo.fileName; // 500t, 750t, 1200t 구분
     const selectCraneLocation = getCraneDistance(craneName);
-    // console.log(craneName, selectCraneLocation);
-    if(workValue.craneLocation === 'back') craneDistance = selectCraneLocation.rearDistance;
-    if(workValue.craneLocation === 'front') craneDistance = selectCraneLocation.frontDistance;
-    if(workValue.craneLocation === 'side') craneDistance = selectCraneLocation.trigger;
+
+    switch(workValue.craneLocation){
+      case 'back' :
+        craneDistance = selectCraneLocation.rearDistance;
+        break;
+      case 'front' :
+        craneDistance = selectCraneLocation.frontDistance;
+        break;
+      case 'side' :
+        craneDistance = selectCraneLocation.trigger;
+        break;
+    };
 
     // if(craneName === 'L_11200_9.1'){ // 테스트용 if 1
     // crane 이름, 코드명 출력을 위한 콘솔
     // console.log(craneName);
-    excelInfo.sheetname.map( (sheetName, index) => { // 엑셀 파일의 sheet
+    excelInfo.allSheetName.map( (sheetName, index) => { // 엑셀 파일의 sheet
       // if(sheetName === 'T7_202t_TAB1780121'){ // 테스트용 if 2 
-      const row = excelInfo.length[index].row;  // sheet의 row 길이
-      const column = excelInfo.length[index].column;  // sheet의 column 길이
+      const { row, column } = excelInfo.length[index];
+      // const row = excelInfo.length[index].row;  // sheet의 row 길이
+      // const column = excelInfo.length[index].column;  // sheet의 column 길이
       const craneCode = sheetName.split('_')[0];  // TN, TY3, TNZF, TYVENZF 등 모드별 이름
       const modeName = modeSelect(sheetName); // main, fix, luffing 구분
       const craneData = getCraneData(excelInfo.data[sheetName], row, column, modeName, workValue, craneDistance); // 작업값을 만족하는 craneData 계산
