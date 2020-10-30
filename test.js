@@ -38,5 +38,3 @@ const workValue = { // input value
 
 // partsArray(craneData);
 console.log(partsArray(craneData));
-// const endTime = new Date().getTime(); 
-// console.log(endTime - startTime);
