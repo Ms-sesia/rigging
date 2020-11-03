@@ -4,7 +4,9 @@ import numberToAlph from "./numberToAlph";
 const offset = 1;
 
 const getPartsDataArray = (data, row, column, partsNameArray) => {
-  return partsNameArray.map( (partsName)=> {
+  // return partsNameArray.map( (partsName)=> {
+  let partsInfoArray = {};
+  partsNameArray.map((partsName) => {
     for (let i = 1; i < column; i++) {
       let charIndex = numberToAlph(i);
       if (i > 25 && i < 52) charIndex = numberToAlph(0) + numberToAlph(i - 26 * 1); // Z이후 엑셀은 AA AB AC AD ...
@@ -12,9 +14,10 @@ const getPartsDataArray = (data, row, column, partsNameArray) => {
 
       const partsData = excelData(data, charIndex, row, offset);
       // parts name check
-      if(partsName === partsData[0]) {
-        const IMAGE_SERVER = "https://localhost/";
-        const partsInfoArray = {
+      if (partsName === partsData[0]) {
+        const IMAGE_SERVER = "https://192.168.0.150:3001/images/";
+        console.log(typeof(partsData[0]))
+        partsInfoArray[partsData[0]] = {
           name: partsData[0],
           code: partsData[1],
           refCode: partsData[2],
@@ -36,11 +39,11 @@ const getPartsDataArray = (data, row, column, partsNameArray) => {
           imgaSrc: `${IMAGE_SERVER}${partsData[18]}`,
           drawOrde: partsData[19],
         };
-        
-        return partsInfoArray;
-      } 
+      }
     }
   });
+
+  return partsInfoArray;
 };
 
 export default getPartsDataArray;
