@@ -36,5 +36,5 @@ const workValue = { // input value
 // startApp(workValue);
 // console.log(startApp(workValue));
 
-partsArray(craneData);
-// console.log(partsArray(craneData));
+// partsArray(craneData);
+console.log(partsArray(craneData));

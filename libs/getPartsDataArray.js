@@ -16,7 +16,6 @@ const getPartsDataArray = (data, row, column, partsNameArray) => {
       // parts name check
       if (partsName === partsData[0]) {
         const IMAGE_SERVER = "https://192.168.0.150:3001/images/";
-        console.log(typeof partsData[0]);
         partsInfoArray[partsData[0]] = {
           name: partsData[0],
           code: partsData[1],
@@ -29,7 +28,8 @@ const getPartsDataArray = (data, row, column, partsNameArray) => {
             y: partsData[7],
           },
           joint: [
-            { x: partsData[8], 
+            { 
+              x: partsData[8], 
               y: partsData[9] 
             },
             {
@@ -51,8 +51,8 @@ const getPartsDataArray = (data, row, column, partsNameArray) => {
               y: partsData[17],
             },
           ],
-          imgaSrc: `${IMAGE_SERVER}${partsData[18]}`,
-          drawOrde: partsData[19],
+          imgSrc: `${IMAGE_SERVER}${partsData[18]}`,
+          drawOrder: partsData[19],
         };
       }
     }
