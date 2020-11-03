@@ -5,7 +5,7 @@ const partsArray = (craneData) => {
   let analysisIndex = 0;
   let dataIndex = 0;
 
-  const partsDataTable = getExcelData('partsDataTable');
+  const partsDataTable = getExcelData("partsDataTable");
   // searching for excel name index
   for (let i = 0; i < partsDataTable.length; i++) {
     switch (partsDataTable[i].fileName) {
@@ -20,7 +20,10 @@ const partsArray = (craneData) => {
 
   const partsNameArray = getPartsNameDataArray(partsDataTable[analysisIndex], craneData);
 
-  return getPartsNameDataArray(partsDataTable[dataIndex], craneData, partsNameArray);
+  return {
+    list: partsNameArray,
+    data: getPartsNameDataArray(partsDataTable[dataIndex], craneData, partsNameArray),
+  };
 };
 
 export default partsArray;
