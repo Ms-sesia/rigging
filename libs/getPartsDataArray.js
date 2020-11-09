@@ -11,7 +11,7 @@ const getPartsDataArray = (data, row, column, partsNameArray) => {
       let charIndex = numberToAlph(i);
       if (i > 25 && i < 52) charIndex = numberToAlph(0) + numberToAlph(i - 26 * 1); // Z이후 엑셀은 AA AB AC AD ...
       if (i >= 52) charIndex = numberToAlph(1) + numberToAlph(i - 26 * 2); // AA이후 엑셀은 BA BB BC BD ...
-
+      
       const partsData = excelData(data, charIndex, row, offset);
       // parts name check
       if (partsName === partsData[0]) {
@@ -36,12 +36,12 @@ const getPartsDataArray = (data, row, column, partsNameArray) => {
               x: partsData[10],
               y: partsData[11],
             },
-          ],
-          wire: [
             {
               x: partsData[12],
               y: partsData[13],
             },
+          ],
+          wire: [
             {
               x: partsData[14],
               y: partsData[15],
@@ -50,9 +50,17 @@ const getPartsDataArray = (data, row, column, partsNameArray) => {
               x: partsData[16],
               y: partsData[17],
             },
+            {
+              x: partsData[18],
+              y: partsData[19],
+            },
           ],
-          imgSrc: `${IMAGE_SERVER}${partsData[18]}`,
-          drawOrder: partsData[19],
+          imgSrc: `${IMAGE_SERVER}${partsData[20]}`,
+          drawOrder: partsData[21],
+          center: {
+            x: partsData[22],
+            y: partsData[23],
+          }
         };
       }
     }
