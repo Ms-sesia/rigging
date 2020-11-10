@@ -1,9 +1,11 @@
 import getExcelData from "./excelConvert";
+import getConnectionDataArray from "./getConnectionDataArray";
 import getPartsNameDataArray from "./getPartsNameDataArray";
 
 const partsArray = (craneData) => {
   let analysisIndex = 0;
   let dataIndex = 0;
+  let connectionIndex = 0;
 
   const partsDataTable = getExcelData("partsDataTable");
   // searching for excel name index
@@ -15,14 +17,18 @@ const partsArray = (craneData) => {
       case "byPartsData":
         dataIndex = i;
         break;
+      case "connectionData":
+        connectionIndex = i;
+        break;
     }
   }
 
   const partsNameArray = getPartsNameDataArray(partsDataTable[analysisIndex], craneData);
 
   return {
-    list: partsNameArray,
-    data: getPartsNameDataArray(partsDataTable[dataIndex], craneData, partsNameArray),
+    partsList: partsNameArray,
+    partsData: getPartsNameDataArray(partsDataTable[dataIndex], craneData, partsNameArray),
+    connectionData: getConnectionDataArray(partsDataTable[connectionIndex], craneData),
   };
 };
 

@@ -1,6 +1,6 @@
 export default {
   "craneName": "L_11200_9.1",
-  "craneCode": "T7YVEV3V2F|NZF",
+  "craneCode": "T3N",
   "craneModeName": "FIX",
   "craneData": {
     "mainBoom": 70.8,
