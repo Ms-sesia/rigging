@@ -35,14 +35,14 @@ const workValue = { // input value
 // startApp(workValue);
 // console.log(startApp(workValue));
 // partsArray(craneData);
-console.log(partsArray(craneData));
+// console.log(partsArray(craneData));
 
-// const craneDataCal = startApp(workValue);
-// const partsInfoData = partsArray(craneDataCal[craneDataCal.length-1]);
-// console.log(craneDataCal[craneDataCal.length-1]);
-// console.log('-------------------------------------------------------------------------------');
-// console.log(partsInfoData.partsList);
-// console.log('-------------------------------------------------------------------------------');
-// console.log(partsInfoData.partsData);
-// console.log('-------------------------------------------------------------------------------');
-// console.log(partsInfoData.connectionData);
+const craneDataCal = startApp(workValue);
+const partsInfoData = partsArray(craneDataCal[craneDataCal.length-1]);
+console.log(craneDataCal[craneDataCal.length-1]);
+console.log('-------------------------------------------------------------------------------');
+console.log(partsInfoData.partsList);
+console.log('-------------------------------------------------------------------------------');
+console.log(partsInfoData.partsData);
+console.log('-------------------------------------------------------------------------------');
+console.log(partsInfoData.connectionData);

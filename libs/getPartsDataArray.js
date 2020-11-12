@@ -54,12 +54,16 @@ const getPartsDataArray = (data, row, column, partsNameArray) => {
               x: partsData[18],
               y: partsData[19],
             },
+            {
+              x: partsData[20],
+              y: partsData[21],
+            }
           ],
-          imgSrc: `${IMAGE_SERVER}${partsData[20]}`,
-          drawOrder: partsData[21],
+          imgSrc: `${IMAGE_SERVER}${partsData[22]}`,
+          drawOrder: partsData[23],
           center: {
-            x: partsData[22],
-            y: partsData[23],
+            x: partsData[24],
+            y: partsData[25],
           }
         };
       }
