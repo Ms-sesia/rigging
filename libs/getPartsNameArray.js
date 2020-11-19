@@ -20,6 +20,10 @@ const getPartsNameArray = (data, row, column, code, modeName, mainBoomLength, fl
       mainParts = partsAnalysisTable.slice(1);
       mainParts[1] = mainParts[1] + "_" + mainBoomLength;
     }
+    // FLYJIB모드 일 때 K길이 추가
+    if (mainParts[mainParts.length - 1] === 'K')
+      mainParts[mainParts.length - 1] = mainParts[mainParts.length - 1] + "_" + flyFixLuffing;
+
     // modeName(Fix, Luffing)이 같고 해당 길이가 같을 때
     if (partsAnalysisTable[0] === modeName && partsAnalysisTable[1] === flyFixLuffing) 
       jibParts = partsAnalysisTable.slice(2);
