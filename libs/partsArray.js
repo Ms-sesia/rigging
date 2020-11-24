@@ -17,7 +17,7 @@ const partsArray = (craneData) => {
       case "byPartsData":
         dataIndex = i;
         break;
-      case "connectionData":
+      case "byPartsConnectionData":
         connectionIndex = i;
         break;
     }

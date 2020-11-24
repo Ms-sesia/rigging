@@ -4,17 +4,17 @@ import startApp from "./libs/riggingData";
 const workValue = { // input value  
   safetyFactor : 85,
   craneLocation : 'back',  // front, back, side
-  workWeight : 20,
+  workWeight : 5,
   workBuilding : {  // 크레인이 건물에 붙는 면을 가로.
-    vertical : 18,
+    vertical : 5,
     horizontal : 0,
-    height : 12,
+    height : 5,
   },
   block : {
-    vertical1: 4,
+    vertical1: 0,
     horizontal1: 0,
-    height1: 3,
-    vertical2: 3,
+    height1: 0,
+    vertical2: 0,
     height2: 0
   },
 };
@@ -24,8 +24,11 @@ startApp(workValue);
 // console.log(partsArray(craneData));
 
 // const partsInfoData = partsArray(craneData);
-const partsInfoData = partsArray(craneDataCal[craneDataCal.length-1]);
-console.log(craneDataCal[craneDataCal.length-1]);
+
+const craneDataCal = startApp(workValue);
+// const partsInfoData = partsArray(craneDataCal[craneDataCal.length-1]);
+const partsInfoData = partsArray(craneDataCal[1]);
+console.log(craneDataCal[1]);
 console.log('-------------------------------------------------------------------------------');
 console.log(partsInfoData.partsList);
 console.log('-------------------------------------------------------------------------------');

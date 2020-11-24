@@ -4,7 +4,8 @@ import numberToAlph from "./numberToAlph";
 export default (excelInfo, craneData) => {
   const {
     craneName,
-    craneCode
+    craneCode,
+    flyFixLuffing,
   } = craneData;
   const result = [];
 
@@ -51,7 +52,11 @@ export default (excelInfo, craneData) => {
         switch (i) {
           // from의 name
           case 0:
-            for (let j = 0; j < wireDataArray[i].length; j++) result[j].from.name = wireDataArray[i][j];
+            for (let j = 0; j < wireDataArray[i].length; j++) {
+              if(result[j].from.name = 'K')
+                result[j].from.name = result[j].from.name + '_' + flyFixLuffing;
+              result[j].from.name = wireDataArray[i][j];
+            }
             break;
           // from의 number
           case 1:
@@ -59,7 +64,11 @@ export default (excelInfo, craneData) => {
             break;
           // to의 name
           case 2:
-            for (let j = 0; j < wireDataArray[i].length; j++) result[j].to.name = wireDataArray[i][j];
+            for (let j = 0; j < wireDataArray[i].length; j++) {
+              if(result[j].to.name = 'K')
+                result[j].to.name = result[j].to.name + '_' + flyFixLuffing;
+              result[j].to.name = wireDataArray[i][j];
+            }
             break;
           // to의 number
           case 3:
