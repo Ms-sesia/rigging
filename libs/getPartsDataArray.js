@@ -15,7 +15,7 @@ const getPartsDataArray = (data, row, column, partsNameArray) => {
       const partsData = excelData(data, charIndex, row, offset);
       // parts name check
       if (partsName === partsData[0]) {
-        const IMAGE_SERVER = "https://192.168.0.150:3001/images/";
+        const IMAGE_SERVER = "http://192.168.0.150:3001/images/";
         partsInfoArray[partsData[0]] = {
           name: partsData[0],
           code: partsData[1],
