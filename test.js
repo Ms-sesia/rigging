@@ -4,11 +4,11 @@ import startApp from "./libs/riggingData";
 const workValue = { // input value  
   safetyFactor : 85,
   craneLocation : 'back',  // front, back, side
-  workWeight : 1,
+  workWeight : 10,
   workBuilding : {  // 크레인이 건물에 붙는 면을 가로.
-    vertical : 24,
+    vertical : 10,
     horizontal : 0,
-    height : 5,
+    height : 10,
   },
   block : {
     vertical1: 0,

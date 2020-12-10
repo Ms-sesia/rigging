@@ -1,6 +1,6 @@
 import findLuffingSpecTable from "./calLuffingData";
 import findMainFixSpecTable from "./calMainFixData";
-import numberToAlph from "./numberToAph";
+import numberToAlph from "./numberToAlph";
 import excelData from "./getExcelData";
 
 const offset = 16;  // excel파일에서 실제 원하는 데이터가 있는 위치까지의 값

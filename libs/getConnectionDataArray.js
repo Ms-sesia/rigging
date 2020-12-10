@@ -5,7 +5,7 @@ export default (excelInfo, data) => {
   const {
     craneName,
     craneCode,
-    craneData: { flyFixLuffing },
+    riggingData: { flyFixLuffing },
   } = data;
   const result = [];
 
