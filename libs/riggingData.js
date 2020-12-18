@@ -55,7 +55,8 @@ const getRiggingData = (workValue) => {
             craneCode : craneCode,
             craneModeName : modeName,
             excelSheetName : sheetName,
-            riggingData : riggingData,
+            // riggingData : riggingData,
+            craneData : riggingData,
           });
           preCraneCode = craneCode;
         }
