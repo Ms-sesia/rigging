@@ -20,21 +20,21 @@ const workValue = {
     height2: 0,
   },
 };
-const result = startApp(workValue);
-console.log(result);
+// const result = startApp(workValue);
+// console.log(result);
 // result.forEach((data) => console.log(data.riggingData.workBuilding, data.riggingData.block));
 // partsArray(craneData);
 // console.log(partsArray(craneData));
 
 // const partsInfoData = partsArray(craneData);
 
-// const craneDataCal = startApp(workValue);
-// const partsInfoData = partsArray(craneDataCal[craneDataCal.length-1]);
+const craneDataCal = startApp(workValue);
+const partsInfoData = partsArray(craneDataCal[craneDataCal.length-1]);
 // const partsInfoData = partsArray(craneDataCal[46]);
 // console.log(craneDataCal[46]);
-// console.log('-------------------------------------------------------------------------------');
-// console.log(partsInfoData.partsList);
-// console.log('-------------------------------------------------------------------------------');
-// console.log(partsInfoData.partsData);
-// console.log('-------------------------------------------------------------------------------');
-// console.log(partsInfoData.connectionData);
+console.log('-------------------------------------------------------------------------------');
+console.log(partsInfoData.partsList);
+console.log('-------------------------------------------------------------------------------');
+console.log(partsInfoData.partsData);
+console.log('-------------------------------------------------------------------------------');
+console.log(partsInfoData.connectionData);

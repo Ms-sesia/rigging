@@ -6,7 +6,7 @@ const getPartsNameDataArray = (excelInfo, craneData, partsNameArray) => {
     craneName,
     craneCode,
     craneModeName,
-    riggingData: { mainBoom, flyFixLuffing },
+    craneData: { mainBoom, flyFixLuffing },
   } = craneData;
   let excelPartsArray = new Array();
 
