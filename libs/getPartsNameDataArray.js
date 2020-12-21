@@ -11,6 +11,7 @@ const getPartsNameDataArray = (excelInfo, craneData, partsNameArray) => {
   let excelPartsArray = new Array();
 
   excelInfo.allSheetName.map((sheetName, index) => {
+    // console.log(sheetName);
     const { row, column } = excelInfo.length[index];
     // 유저가 선택한 크레인톤수와 파츠분석표 톤수가 같을 때
     if (sheetName === craneName && !partsNameArray)

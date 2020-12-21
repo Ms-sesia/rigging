@@ -11,8 +11,9 @@ const getPartsDataArray = (data, row, column, partsNameArray) => {
       let charIndex = numberToAlph(i);
       if (i > 25 && i < 52) charIndex = numberToAlph(0) + numberToAlph(i - 26 * 1); // Z이후 엑셀은 AA AB AC AD ...
       if (i >= 52) charIndex = numberToAlph(1) + numberToAlph(i - 26 * 2); // AA이후 엑셀은 BA BB BC BD ...
-      
+
       const partsData = excelData(data, charIndex, row, offset);
+      // console.log(partsData, 2);
       // parts name check
       if (partsName === partsData[0]) {
         const IMAGE_SERVER = "http://192.168.0.150:3001/images/";
@@ -20,7 +21,7 @@ const getPartsDataArray = (data, row, column, partsNameArray) => {
           name: partsData[0],
           code: partsData[1],
           refCode: partsData[2],
-          marker: partsData[3],
+          isMarked: partsData[3],
           length: partsData[4],
           type: partsData[5],
           origin: {
@@ -28,9 +29,9 @@ const getPartsDataArray = (data, row, column, partsNameArray) => {
             y: partsData[7],
           },
           joint: [
-            { 
-              x: partsData[8], 
-              y: partsData[9] 
+            {
+              x: partsData[8],
+              y: partsData[9],
             },
             {
               x: partsData[10],
@@ -57,19 +58,29 @@ const getPartsDataArray = (data, row, column, partsNameArray) => {
             {
               x: partsData[20],
               y: partsData[21],
-            }
+            },
           ],
           imgSrc: `${IMAGE_SERVER}${partsData[22]}`,
           drawOrder: partsData[23],
           center: {
             x: partsData[24],
             y: partsData[25],
-          }
+          },
+          marker: [
+            {
+              x: partsData[26],
+              y: partsData[27],
+            },
+            {
+              x: partsData[28],
+              y: partsData[29],
+            },
+          ],
         };
       }
     }
   });
-
+  console.log(partsInfoArray);
   return partsInfoArray;
 };
 

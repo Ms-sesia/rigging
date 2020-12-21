@@ -7,6 +7,7 @@ const partsArray = (craneData) => {
   let dataIndex = 0;
   let connectionIndex = 0;
 
+  //partsDataTable 폴더 안의 excel파일 리스트 읽어오기.
   const partsDataTable = getExcelData("partsDataTable");
   // searching for excel name index
   for (let i = 0; i < partsDataTable.length; i++) {

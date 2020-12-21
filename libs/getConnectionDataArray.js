@@ -77,6 +77,5 @@ export default (excelInfo, data) => {
       }
     }
   });
-  console.log(1, result);
   return result;
 };

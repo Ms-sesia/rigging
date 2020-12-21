@@ -31,11 +31,11 @@ const getRiggingData = (workValue) => {
         break;
     };
 
-    // if(craneName === 'L_11200_9.1'){ // 테스트용 if 1
+    if(craneName === 'L_11200_9.1'){ // 테스트용 if 1
     // crane 이름, 코드명 출력을 위한 콘솔
     // console.log(craneName);
     excelInfo.allSheetName.map( (sheetName, index) => { // 엑셀 파일의 sheet
-      // if(sheetName === 'T7_202t_TAB1780121'){ // 테스트용 if 2 
+      if(sheetName === 'T7Y_202t_TAB1780131'){ // 테스트용 if 2 
       const { row, column } = excelInfo.length[index];
       // const row = excelInfo.length[index].row;  // sheet의 row 길이
       // const column = excelInfo.length[index].column;  // sheet의 column 길이
@@ -61,10 +61,10 @@ const getRiggingData = (workValue) => {
           preCraneCode = craneCode;
         }
       }
-    // }// 테스트용 if 2
+    }// 테스트용 if 2
     });
   }
-  // }// 테스트용 if 1
+  }// 테스트용 if 1
   );
   if(craneInfo.length) {
     craneInfo.sort( (a, b) => a.craneName.split('_')[1] - b.craneName.split('_')[1] );  // 크레인이름 오름차순 정렬
