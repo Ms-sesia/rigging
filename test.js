@@ -5,18 +5,18 @@ const workValue = {
   // input value
   safetyFactor: 85,
   craneLocation: "back", // front, back, side
-  workWeight: 15,
+  workWeight: 20,
   workBuilding: {
     // 크레인이 건물에 붙는 면을 가로.
-    vertical: 1, //거리
+    vertical: 20, //거리
     horizontal: 0,
-    height: 70, //높이
+    height: 80, //높이
   },
   block: {
-    vertical1: 20, //거리
+    vertical1: 10, //거리
     horizontal1: 0,
-    height1: 43, //높이
-    vertical2: 0,
+    height1: 20, //높이
+    vertical2: 4, //여유거리
     height2: 0,
   },
 };
@@ -29,15 +29,16 @@ const workValue = {
 // const partsInfoData = partsArray(craneData);
 
 const craneDataCal = startApp(workValue);
-const partsInfoData = partsArray(craneDataCal[0]);
+console.log(craneDataCal);
+// const partsInfoData = partsArray(craneDataCal[0]);
 // const partsInfoData = partsArray(craneDataCal[craneDataCal.length-1]);
 // const partsInfoData = partsArray(craneDataCal[46]);
 // console.log(craneDataCal[46]);
 // console.log('-------------------------------------------------------------------------------');
-console.log("partsList", partsInfoData.partsList);
-console.log("-------------------------------------------------------------------------------");
-console.log("allPartsData", partsInfoData.partsData);
-console.log("-------------------------------------------------------------------------------");
-console.log("marker", partsInfoData.partsData.BODY.marker);
-console.log("-------------------------------------------------------------------------------");
-console.log("connectionData", partsInfoData.connectionData);
+// console.log("partsList", partsInfoData.partsList);
+// console.log("-------------------------------------------------------------------------------");
+// console.log("allPartsData", partsInfoData.partsData);
+// console.log("-------------------------------------------------------------------------------");
+// console.log("marker", partsInfoData.partsData.BODY.marker);
+// console.log("-------------------------------------------------------------------------------");
+// console.log("connectionData", partsInfoData.connectionData);

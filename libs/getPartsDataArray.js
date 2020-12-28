@@ -80,7 +80,7 @@ const getPartsDataArray = (data, row, column, partsNameArray) => {
       }
     }
   });
-  console.log(partsInfoArray);
+  // console.log(partsInfoArray);
   return partsInfoArray;
 };
 

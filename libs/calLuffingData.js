@@ -60,10 +60,10 @@ const findLuffingSpecTable = (spec, workValue, heightOfHookCrane, craneDistance)
   const B1WDistance = workValue.workBuilding.vertical + workValue.block.vertical1;
   for (let i = 0; i < spec.weight.length; i++) {
     const safetyFactor = Number(((workValue.workWeight / spec.weight[i]) * 85).toFixed(1));
+    // 원하는 안전율보다 낮은 안전율만 계산.
     if (safetyFactor < workValue.safetyFactor) {
-      // 원하는 안전율보다 낮은 안전율만 계산.
+      // weight data가 있어야하고 작업무게 이상 && 장애물 1 2 거리 + 작업거리 + 크레인거리 가 총 거리보다 작아야한다.
       if (spec.weight[i] >= workValue.workWeight && B1B2WDistance + craneDistance < spec.distance[i]) {
-        // weight data가 있어야하고 작업무게 이상 && 장애물 1 2 거리 + 작업거리 + 크레인거리 가 총 거리보다 작아야한다.
         let params = {};
         const MBoom = spec.mainBoom + spec.totalExtLength; // mainBoom + totalExtLength
         // 삼각함수 : Math.cos(x*Math.PI/180) 각도는 라디안 표기
