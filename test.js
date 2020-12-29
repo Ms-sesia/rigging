@@ -29,8 +29,11 @@ const workValue = {
 // const partsInfoData = partsArray(craneData);
 
 const craneDataCal = startApp(workValue);
-console.log(craneDataCal);
-// const partsInfoData = partsArray(craneDataCal[0]);
+// console.log(craneDataCal);
+craneDataCal.forEach((data) => {
+  console.log(data);
+})
+// const partsInfoData = partsArray(craneDataCal[18]);
 // const partsInfoData = partsArray(craneDataCal[craneDataCal.length-1]);
 // const partsInfoData = partsArray(craneDataCal[46]);
 // console.log(craneDataCal[46]);

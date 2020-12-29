@@ -195,7 +195,6 @@ const findMainFixSpecTable = (
                     const blockflyFixAngle = Number(( Math.atan((workValue.block.height1 - params.h1 - heightOfHookCrane.craneHeight) / (params.d2 - B1WDistance)) * (180 / Math.PI)).toFixed(1));
                     if(blockflyFixAngle < mainAngle - spec.flyFixAngle){
                       const testCode = 6;
-                      // console.log(testCode);
                       const tmpBlockDist = workValue.block.height1 ? (workValue.block.height1 - params.h1 - heightOfHookCrane.craneHeight) / Math.tan(((mainAngle - spec.flyFixAngle) * Math.PI) / 180) : undefined;
                       const tmpBuildingDist = (workValue.workBuilding.height - params.h1 - heightOfHookCrane.craneHeight) / Math.tan(((mainAngle - spec.flyFixAngle) * Math.PI) / 180);
                       params.flyFixLuffingToBlockEdgeDistance = params.d2 - (workValue.workBuilding.vertical + workValue.block.vertical1) - tmpBlockDist;
@@ -238,7 +237,6 @@ const findMainFixSpecTable = (
                       if(params.mainToBlockEdgeDistance >= 3)
                         return riggingData(spec, i, workValue, heightOfHookCrane, rearDistance, params, testCode);
                       } else {
-                        console.log('픽스 코드 8번 데이터');
                         if(params.mainToBuildingEdgeDistance >= 3)
                         return riggingData(spec, i, workValue, heightOfHookCrane, rearDistance, params, testCode);
                     }
