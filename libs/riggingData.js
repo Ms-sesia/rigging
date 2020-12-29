@@ -12,24 +12,11 @@ const getRiggingData = (workValue) => {
     console.log("입력한 조건값이 올바르지 않습니다.");
     return craneInfo;
   }
+  
   specTableInfo.forEach( (excelInfo) => {  // 엑셀파일 전부
     let preCraneCode = '';
-    // let printPreCode = '';
-    let craneDistance = 0;
     const craneName = excelInfo.fileName; // 500t, 750t, 1200t 구분
-    const selectCraneLocation = getCraneDistance(craneName);
-
-    switch(workValue.craneLocation){
-      case 'back' :
-        craneDistance = selectCraneLocation.rearDistance;
-        break;
-      case 'front' :
-        craneDistance = selectCraneLocation.frontDistance;
-        break;
-      case 'side' :
-        craneDistance = selectCraneLocation.trigger;
-        break;
-    };
+    const craneDistance = getCraneDistance(craneName);
 
     // if(craneName === 'L_11200_9.1'){ // 테스트용 if 1
     // crane 이름, 코드명 출력을 위한 콘솔
@@ -42,12 +29,6 @@ const getRiggingData = (workValue) => {
       const craneCode = sheetName.split('_')[0];  // TN, TY3, TNZF, TYVENZF 등 모드별 이름
       const modeName = modeSelect(sheetName); // main, fix, luffing 구분
       const riggingData = getCraneData(excelInfo.data[sheetName], row, column, modeName, workValue, craneDistance); // 작업값을 만족하는 craneData 계산
-      // crane 이름, 코드명 출력을 위한 콘솔
-      // if(printPreCode !== craneCode){
-      //   console.log(craneCode);
-      // }
-      // printPreCode = craneCode;
-      // console.log(craneCode);
       if(riggingData){  // 작업값들을 만족하는 제원표의 계산데이터
         if(preCraneCode !== craneCode){
           craneInfo.push({
@@ -62,7 +43,6 @@ const getRiggingData = (workValue) => {
         }
       }
     // }// 테스트용 if 2
-
     });
   }
   // }// 테스트용 if 1

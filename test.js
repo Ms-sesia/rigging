@@ -10,13 +10,13 @@ const workValue = {
     // 크레인이 건물에 붙는 면을 가로.
     vertical: 20, //거리
     horizontal: 0,
-    height: 80, //높이
+    height: 50, //높이
   },
   block: {
-    vertical1: 10, //거리
+    vertical1: 0, //거리
     horizontal1: 0,
-    height1: 20, //높이
-    vertical2: 4, //여유거리
+    height1: 0, //높이
+    vertical2: 0, //여유거리
     height2: 0,
   },
 };
