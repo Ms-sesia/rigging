@@ -58,6 +58,8 @@ const riggingData = (spec, index, workValue, heightOfHookCrane, craneDistance, p
         height2: workValue.block.height2,
       },
       testCode: testCode,
+      luffingMargin: params.luffingMargin,
+      adapterMargin: params.adapterMargin
     };
 };
 
@@ -86,7 +88,7 @@ const findLuffingSpecTable = (
       // weight data가 있어야하고 작업무게 이상
       if (spec.weight[i] >= workValue.workWeight) {
         let params = {};
-        let blockVertical1 = 0, workBuildingVertical, B1WHeight;
+        let blockVertical1 = 0, workBuildingVertical = 0, B1WHeight;
         const MBoom = spec.mainBoom + spec.totalExtLength; // mainBoom + totalExtLength
         // 삼각함수 : Math.cos(x*Math.PI/180) 각도는 라디안 표기
         params.d1 = MBoom * Math.cos((spec.mainAngle * Math.PI) / 180); // luffing에서 d1은 메인붐과 메인붐각도가 정해져있기 때문에 고정
@@ -162,7 +164,7 @@ const findLuffingSpecTable = (
                 const tmpBlockDist = workValue.block.height1 ? (workValue.block.height1 - heightOfHookCrane.craneHeight) / Math.tan((spec.mainAngle * Math.PI) / 180) : undefined;
                 const tmpBuildingDist = (workValue.workBuilding.height - heightOfHookCrane.craneHeight) / Math.tan((spec.mainAngle * Math.PI) / 180);
                 params.mainToBlockEdgeDistance = spec.distance[i] - (workValue.workBuilding.vertical + workValue.block.vertical1) - tmpBlockDist;
-                params.mainToBuildingEdgeDistance = spec.distance[i] - (workValue.workBuilding.vertical + workValue.block.vertical1) - tmpBuildingDist;
+                params.mainToBuildingEdgeDistance = spec.distance[i] - workValue.workBuilding.vertical - tmpBuildingDist;
                 // EdgeDistance길이 비교. 더 짧은 길이로 정리.
                 if(params.mainToBlockEdgeDistance > params.mainToBuildingEdgeDistance){
                   if(params.mainToBuildingEdgeDistance >= 3)
@@ -234,7 +236,7 @@ const findLuffingSpecTable = (
                 const tmpBlockDist = workValue.block.height1 ? (workValue.block.height1 - heightOfHookCrane.craneHeight) / Math.tan((spec.mainAngle * Math.PI) / 180) : undefined;
                 const tmpBuildingDist = (workValue.workBuilding.height - heightOfHookCrane.craneHeight) / Math.tan((spec.mainAngle * Math.PI) / 180);
                 params.mainToBlockEdgeDistance = spec.distance[i] - workValue.workBuilding.vertical - workValue.block.vertical1 - tmpBlockDist;
-                params.mainToBuildingEdgeDistance = spec.distance[i] - workValue.workBuilding.vertical + workValue.block.vertical1 - tmpBuildingDist;
+                params.mainToBuildingEdgeDistance = spec.distance[i] - workValue.workBuilding.vertical - tmpBuildingDist;
                 if(params.mainToBlockEdgeDistance < params.mainToBuildingEdgeDistance){
                   if(params.mainToBlockEdgeDistance >= 3)
                     return riggingData(spec, i, workValue, heightOfHookCrane, rearDistance, params, testCode);

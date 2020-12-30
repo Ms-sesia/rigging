@@ -161,7 +161,7 @@ const findMainFixSpecTable = (
                     const tmpBlockDist = workValue.block.height1 ? (workValue.block.height1 - heightOfHookCrane.craneHeight) / Math.tan((mainAngle * Math.PI) / 180) : undefined;
                     const tmpBuildingDist = (workValue.workBuilding.height - heightOfHookCrane.craneHeight) / Math.tan((mainAngle * Math.PI) / 180);
                     params.mainToBlockEdgeDistance = spec.distance[i] - (workValue.workBuilding.vertical + workValue.block.vertical1) - tmpBlockDist;
-                    params.mainToBuildingEdgeDistance = spec.distance[i] - (workValue.workBuilding.vertical + workValue.block.vertical1) - tmpBuildingDist;
+                    params.mainToBuildingEdgeDistance = spec.distance[i] - workValue.workBuilding.vertical - tmpBuildingDist;
                     if(params.mainToBlockEdgeDistance > params.mainToBuildingEdgeDistance){
                       if(params.mainToBuildingEdgeDistance >= 3)
                         return riggingData(spec, i, workValue, heightOfHookCrane, rearDistance, params, testCode);
@@ -232,7 +232,7 @@ const findMainFixSpecTable = (
                     const tmpBlockDist = workValue.block.height1 ? (workValue.block.height1 - heightOfHookCrane.craneHeight) / Math.tan((mainAngle * Math.PI) / 180) : undefined;
                     const tmpBuildingDist = (workValue.workBuilding.height - heightOfHookCrane.craneHeight) / Math.tan((mainAngle * Math.PI) / 180);
                     params.mainToBlockEdgeDistance = spec.distance[i] - workValue.workBuilding.vertical - workValue.block.vertical1 - tmpBlockDist;
-                    params.mainToBuildingEdgeDistance = spec.distance[i] - workValue.workBuilding.vertical + workValue.block.vertical1 - tmpBuildingDist;
+                    params.mainToBuildingEdgeDistance = spec.distance[i] - workValue.workBuilding.vertical - tmpBuildingDist;
                     if(params.mainToBlockEdgeDistance < params.mainToBuildingEdgeDistance){
                       if(params.mainToBlockEdgeDistance >= 3)
                         return riggingData(spec, i, workValue, heightOfHookCrane, rearDistance, params, testCode);
