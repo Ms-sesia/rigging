@@ -100,11 +100,14 @@ const findLuffingSpecTable = (
         params.h1 = MBoom * Math.sin((spec.mainAngle * Math.PI) / 180);
         params.h2 = spec.flyFixLuffing * Math.sin((params.luffingAngle * Math.PI) / 180);
         params.safetyFactor = safetyFactor;
-        if(workValue.block.vertical1) 
+        if(workValue.block.vertical1){
           blockVertical1 = workValue.block.vertical1 + params.luffingMargin + params.adapterMargin;
+          workBuildingVertical = workValue.block.vertical;
+        }
         else workBuildingVertical = workValue.workBuilding.vertical + params.luffingMargin + params.adapterMargin;
         const B1B2WDistance = workBuildingVertical + blockVertical1 + workValue.block.vertical2;
         const B1WDistance = workBuildingVertical + blockVertical1;
+        
         // 장애물 1 2 거리 + 작업거리 + 크레인거리 + luffingMargin + adapterMargin 이 총 거리보다 작아야한다.
         if (B1B2WDistance + craneDistance < spec.distance[i]) {
           // 나중에 resolver에서 mutation의 args단에서 처리
