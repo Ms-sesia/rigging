@@ -5,17 +5,17 @@ const workValue = {
   // input value
   safetyFactor: 85,
   craneLocation: "back", // front, back, side
-  workWeight: 10,
+  workWeight: 20,
   workBuilding: {
     // 크레인이 건물에 붙는 면을 가로.
-    vertical: 1, //거리
+    vertical: 20, //거리
     horizontal: 0,
-    height: 56, //높이
+    height: 20, //높이
   },
   block: {
-    vertical1: 48, //거리
+    vertical1: 10, //거리
     horizontal1: 0,
-    height1: 45, //높이
+    height1: 10, //높이
     vertical2: 5, //여유거리
     height2: 0,
   },
@@ -32,7 +32,7 @@ const craneDataCal = startApp(workValue);
 // console.log(craneDataCal);
 craneDataCal.forEach((data) => {
   console.log(data);
-})
+});
 // const partsInfoData = partsArray(craneDataCal[18]);
 // const partsInfoData = partsArray(craneDataCal[craneDataCal.length-1]);
 // const partsInfoData = partsArray(craneDataCal[46]);

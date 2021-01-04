@@ -2,6 +2,11 @@ const riggingData = (spec, index, workValue, heightOfHookCrane, craneDistance, p
   const marginHeight = Number((params.h1 + params.h2 + heightOfHookCrane.craneHeight - (workValue.workBuilding.height + heightOfHookCrane.hookHeight)).toFixed(1));
   const B1B2WDistance = workValue.workBuilding.vertical + workValue.block.vertical1 + workValue.block.vertical2;
 
+  if(!params.mainToBlockEdgeDistance) params.mainToBlockEdgeDistance = 0
+  if(!params.mainToBuildingEdgeDistance) params.mainToBuildingEdgeDistance = 0
+  if(!params.flyFixLuffingToBlockEdgeDistance) params.flyFixLuffingToBlockEdgeDistance = 0
+  if(!params.flyFixLuffingToBuildingEdgeDistance) params.flyFixLuffingToBuildingEdgeDistance = 0
+  
   if (marginHeight > 0)
     return {// 출력용 객체, 거리가 먼 것(가벼운 중량을 들 수 있는 것)을 기준으로 출력
       mainBoom: spec.mainBoom,
