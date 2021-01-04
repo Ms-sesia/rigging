@@ -61,9 +61,6 @@ const riggingData = (spec, index, workValue, heightOfHookCrane, craneDistance, p
         vertical2: workValue.block.vertical2,
         height2: workValue.block.height2,
       },
-      testCode: testCode,
-      luffingMargin: params.luffingMargin,
-      adapterMargin: params.adapterMargin
     };
 };
 

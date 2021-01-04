@@ -6,7 +6,7 @@ const riggingData = (spec, index, workValue, heightOfHookCrane, craneDistance, p
   if(!params.mainToBuildingEdgeDistance) params.mainToBuildingEdgeDistance = 0
   if(!params.flyFixLuffingToBlockEdgeDistance) params.flyFixLuffingToBlockEdgeDistance = 0
   if(!params.flyFixLuffingToBuildingEdgeDistance) params.flyFixLuffingToBuildingEdgeDistance = 0
-  
+
   if (marginHeight > 0)
     return {// 출력용 객체, 거리가 먼 것(가벼운 중량을 들 수 있는 것)을 기준으로 출력
       mainBoom: spec.mainBoom,
@@ -32,7 +32,7 @@ const riggingData = (spec, index, workValue, heightOfHookCrane, craneDistance, p
       centerToBuildingDistance: Number((spec.distance[index] - workValue.workBuilding.vertical).toFixed(1)),
       centerToBlockDistance : Number((spec.distance[index] - B1B2WDistance).toFixed(1)),
       craneToBuildingDistance: Number((spec.distance[index] - craneDistance - workValue.workBuilding.vertical).toFixed(1)),
-      rearToBlockDistance : Number((spec.distance[index] - craneDistance - B1B2WDistance).toFixed(1)),
+      craneToBlockDistance : Number((spec.distance[index] - craneDistance - B1B2WDistance).toFixed(1)),
       totalDistance: Number((params.d1 + params.d2).toFixed(1)),
       tableDistance: spec.distance[index],
       height1: Number((params.h1).toFixed(1)),
@@ -41,7 +41,7 @@ const riggingData = (spec, index, workValue, heightOfHookCrane, craneDistance, p
       marginHeight: marginHeight,
       workingArea : spec.workingArea,
       tableWeight: spec.weight[index],
-      counterWeight: spec.counterWeight,
+      counterWeight: spec.counterWeight.toString(),
       overRear: spec.overRear,
       optional: spec.optional,
       safetyFactor: params.safetyFactor,  // 안전율
@@ -59,7 +59,6 @@ const riggingData = (spec, index, workValue, heightOfHookCrane, craneDistance, p
         vertical2: workValue.block.vertical2,
         height2: workValue.block.height2,
       },
-      testCode : testCode,
     };
 };
 
