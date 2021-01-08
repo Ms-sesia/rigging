@@ -12,7 +12,19 @@ const getRiggingData = (workValue) => {
     console.log("입력한 조건값이 올바르지 않습니다.");
     return craneInfo;
   }
-  
+    // block: {
+  //   vertical1: 10, //거리
+  //   horizontal1: 0,
+  //   height1: 10, //높이
+  //   vertical2: 5, //여유거리
+  //   height2: 0,
+  // },
+  if(!workValue.block.vertical1) workValue.block.vertical1 = 0;
+  if(!workValue.block.horizontal1) workValue.block.horizontal1 = 0;
+  if(!workValue.block.height1) workValue.block.height1 = 0;
+  if(!workValue.block.vertical2) workValue.block.vertical2 = 0;
+  if(!workValue.block.height2) workValue.block.height2 = 0;
+
   specTableInfo.forEach( (excelInfo) => {  // 엑셀파일 전부
     let preCraneCode = '';
     const craneName = excelInfo.fileName; // 500t, 750t, 1200t 구분

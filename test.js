@@ -13,11 +13,16 @@ const workValue = {
     height: 20, //높이
   },
   block: {
-    vertical1: 10, //거리
-    horizontal1: 0,
-    height1: 10, //높이
-    vertical2: 5, //여유거리
-    height2: 0,
+    // vertical1: 10, //거리
+    // horizontal1: 0,
+    // height1: 10, //높이
+    // vertical2: 5, //여유거리
+    // height2: 0,
+    vertical1: undefined, //거리
+    horizontal1: undefined,
+    height1: undefined, //높이
+    vertical2: undefined, //여유거리
+    height2: undefined,
   },
 };
 // const result = startApp(workValue);

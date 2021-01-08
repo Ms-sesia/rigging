@@ -16,7 +16,7 @@ const getPartsDataArray = (data, row, column, partsNameArray) => {
       // console.log(partsData, 2);
       // parts name check
       if (partsName === partsData[0]) {
-        const IMAGE_SERVER = "http://localhost:4000/images/";
+        const IMAGE_SERVER = "";
         partsInfoArray[partsData[0]] = {
           name: partsData[0],
           code: partsData[1],
