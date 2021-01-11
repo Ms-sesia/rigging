@@ -8,9 +8,9 @@ const workValue = {
   workWeight: 20,
   workBuilding: {
     // 크레인이 건물에 붙는 면을 가로.
-    vertical: 20, //거리
+    vertical: 50, //거리
     horizontal: 0,
-    height: 20, //높이
+    height: 50, //높이
   },
   block: {
     // vertical1: 10, //거리
@@ -25,6 +25,33 @@ const workValue = {
     height2: undefined,
   },
 };
+
+const unlockedCraneName = [
+  // "L_1030_2.1",
+  // "L_1040_2.1",
+  // "L_1050_3.1",
+  // "L_1055_3.2",
+  // "L_1060_3.1",
+  // "L_1070_4.1",
+  // "L_1070_4.2",
+  // "L_1090_4.1",
+  // "L_1095_5.1",
+  // "L_1100_4.2",
+  // "L_1100_5.2",
+  // "L_11200_9.1",
+  // "L_1130_5.1",
+  // "L_1150_6.1",
+  // "L_1200_5.1",
+  // "L_1250_6.1",
+  // "L_1300_6.1",
+  // "L_1300_6.2",
+  // "L_1350_6.1",
+  // "L_1400_7.1",
+  // "L_1450_8.1",
+  "L_1500_50m_8.1",
+  "L_1500_84m_8.1",
+  // "L_1750_9.1"
+];
 // const result = startApp(workValue);
 // console.log(result);
 // result.forEach((data) => console.log(data.riggingData.workBuilding, data.riggingData.block));
@@ -33,11 +60,13 @@ const workValue = {
 
 // const partsInfoData = partsArray(craneData);
 
-const craneDataCal = startApp(workValue);
+const craneDataCal = startApp(workValue, unlockedCraneName);
 // console.log(craneDataCal);
 craneDataCal.forEach((data) => {
-  console.log(data);
+  console.log(data.craneName);
+  console.log(data.craneCode);
 });
+console.log(craneDataCal.length);
 // const partsInfoData = partsArray(craneDataCal[18]);
 // const partsInfoData = partsArray(craneDataCal[craneDataCal.length-1]);
 // const partsInfoData = partsArray(craneDataCal[46]);
