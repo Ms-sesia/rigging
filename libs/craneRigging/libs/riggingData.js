@@ -3,7 +3,7 @@ import modeSelect from "./modeSelect";
 import getCraneDistance from "./getCraneDistance";
 import getExcelData from "./excelConvert";
 
-const getRiggingData = (workValue, unlockedCraneName) => {
+const getRiggingData = (workValue, unlockedCraneNames) => {
   const specTableInfo = getExcelData("craneSpecTable");
   // 초과치 입력시 처리. 한계조건 : 무게 1200, 작업높이 136, 작업거리 136
   let craneInfo = new Array(); // 전체 크레인에 대한 리깅가능한 데이터를 모아둔 배열.
@@ -53,7 +53,7 @@ const getRiggingData = (workValue, unlockedCraneName) => {
           });
           preCraneCode = craneCode;
         }
-        if (!unlockedCraneName.includes(craneName)) {
+        if (!unlockedCraneNames.includes(craneName)) {
           break;
         }
       }

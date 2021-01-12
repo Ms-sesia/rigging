@@ -1,7 +1,6 @@
 node_modules/
 
-excelData/
-excelDataJPG/
+data/
 
 libs/backCalMainFixData.js
 libs/calMainFixData_.js
