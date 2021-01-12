@@ -32,7 +32,6 @@ const getRiggingData = (workValue, unlockedCraneName) => {
     const craneName = excelInfo.fileName;
     const craneDistance = getCraneDistance(craneName);
     // if (craneName === "L_11200_9.1") {// 테스트용 if 1
-    console.log(`-------------------------- ${craneName} --------------------------`, i);
     for (let j = 0; j < specTableInfo[i].allSheetName.length; j++) {
       // 엑셀 파일의 sheet
       // if(sheetName === 'T7Y_202t_TAB1780131'){ // 테스트용 if 2
@@ -55,7 +54,6 @@ const getRiggingData = (workValue, unlockedCraneName) => {
           preCraneCode = craneCode;
         }
         if (!unlockedCraneName.includes(craneName)) {
-          console.log(craneName);
           break;
         }
       }
