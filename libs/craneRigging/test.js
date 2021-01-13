@@ -63,6 +63,7 @@ const unlockedCraneName = [
 const craneDataCal = startApp(workValue, unlockedCraneName);
 // console.log(craneDataCal);
 craneDataCal.forEach((data) => {
+  console.log(data.paid);
   console.log(data.craneName);
   console.log(data.craneCode);
 });
